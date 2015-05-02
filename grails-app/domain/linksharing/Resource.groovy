@@ -7,7 +7,7 @@ String description
 Date dateCreated
 Date lastUpdated
 
-
+static hasMany=[readingItems:ReadingItem,resourceRatings:ResourceRating]
 static belongsTo=[topic:Topic]
 
 
@@ -18,8 +18,8 @@ static belongsTo=[topic:Topic]
  static constraints = {
 
         title (unique:'topic')
-	description ( size:1..1024) 
-	creater nullable:true,blank:true
+	description ( size:1..1024)
+
 	
     }
 

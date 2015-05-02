@@ -14,7 +14,7 @@ boolean active=false
 Date dateCreated
 Date lastUpdated
 
-static hasMany=[topic:Topic,subscription:Subscription,readingItem:ReadingItem,resourceRating:ResourceRating]
+static hasMany=[topics:Topic,subscriptions:Subscription,readingItems:ReadingItem,resourceRatings:ResourceRating]
 
     static constraints = {
            

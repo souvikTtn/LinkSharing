@@ -1,5 +1,5 @@
 package linksharing
-import  linksharing.scr.groovy.*
+
 
 class Subscription {
 

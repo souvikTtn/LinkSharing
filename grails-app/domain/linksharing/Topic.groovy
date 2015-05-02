@@ -1,5 +1,5 @@
 package linksharing
-import linksharing.scr.groovy.*
+
 
 class Topic {
 String name
@@ -7,7 +7,7 @@ Visibility visibility
 Date dateCreated
 Date lastUpdated
 static belongsTo=[user:User]
-static hasMany=[resource:Resource,subscription:Subscription] 
+static hasMany=[resources:Resource,subscriptions:Subscription]
 
 
     static constraints = {
