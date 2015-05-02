@@ -69,12 +69,11 @@ void createReadingItems(){
 int size=Resource.list().size();	
 User.list().each{user->
 	Random random=new Random()
-
-    println Resource.get(Math.abs(random.nextInt() % size))
+    //println Resource.get(Math.abs(random.nextInt() % size))
 	user.addToReadingItems(new ReadingItem(resource:Resource.get(Math.abs(random.nextInt() % size)),isRead:true   ))
 	user.addToReadingItems(new ReadingItem(resource:Resource.get(Math.abs(random.nextInt() % size)),isRead:true   ))
 	user.addToReadingItems(new ReadingItem(resource:Resource.get(Math.abs(random.nextInt() % size)),isRead:true   ))
-    saveObject(user);
+   saveObject(user);
  
      }
 
