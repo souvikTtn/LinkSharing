@@ -17,7 +17,7 @@ class TestGorm2Controller {
 
     def query1(){
 			
-		 User u=User.get(1);//Assuming current user
+		 User u=User.first();//Assuming current user
 		 List<Subscription> subscriptions =Subscription.findAllByUser(u,[offset:0,max:4,sort:"topic.lastUpdated",order:"desc"])
 		render "${subscriptions}"
 	}
@@ -29,7 +29,7 @@ class TestGorm2Controller {
 		/*Inbox creation
 strategy first find allready readed resource from readingItem, Second User subscribed topic, third: using this two list in finding user unread resource */	
 
-	     User u=User.get(1);//Assuming current user
+	     User u=User.first();//Assuming current user
 		 List<Resource> readedResource=ReadingItem.createCriteria().list(){
 						projections{
 							property('resource')						
@@ -66,7 +66,7 @@ strategy first find allready readed resource from readingItem, Second User subsc
 		
 	def query3() {
 
-		User u=User.get(1);//Assuming current user
+		User u=User.first();//Assuming current user
 		// user Subscribed topic
 		def topicSubscribed=Subscription.createCriteria().list{
 
@@ -82,7 +82,7 @@ strategy first find allready readed resource from readingItem, Second User subsc
 		
 		//Total count of Resource for each Topic		
 		
-	List<Resource> unreadResource =Resource.createCriteria().list{
+	List<Resource> countofResourceEachTopic =Resource.createCriteria().list{
 			         projections{
 						groupProperty('topic')
 						rowCount()					
@@ -90,7 +90,7 @@ strategy first find allready readed resource from readingItem, Second User subsc
 				'in'('topic',topicSubscribed)	
 			}
 			
-		 render "<br><br>${unreadResource}"
+		 render "<br><br>${countofResourceEachTopic}"
                  
 		//total number of subscription for each topic
 		
