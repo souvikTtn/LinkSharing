@@ -17,9 +17,9 @@ class BootStrap {
   
 
  void createUsers(){
-     User user=new User	(firstName:"ajay",email:"ajay@gmail.com",username:"ajay123",password:"ajay123",passwordConfirm:"ajay123",lastName:"dixit");
+     User user=new User	(firstName:"ajay",email:"ajay@gmail.com",username:"ajay123",password:"ajay123",confirmPassword:"ajay123",lastName:"dixit");
       saveObject(user);
-    user=new User(firstName:"umesh",email:"umeshk820@gmail.com",username:"umeshk820",password:"umesh@123",passwordConfirm:"umesh@123",lastName:"kumar");
+    user=new User(firstName:"umesh",email:"umeshk820@gmail.com",username:"umeshk820",password:"umesh@123",confirmPassword:"umesh@123",lastName:"kumar");
       
 	saveObject(user);
 	}
@@ -50,11 +50,11 @@ void createResources(){
 	    User user=User.findById(index%2+1)
 
            topic.addToResources(
-		new LinkResource(creater:user, title:"link tittle ${index+1}",description:"link tiitle${index+1}	descripion", url:"https://grails.github.io/grails-doc/link${index+1}"  ) 
+		new LinkResource(creator:user, title:"link tittle ${index+1}",description:"link tiitle${index+1}	descripion", url:"https://grails.github.io/grails-doc/link${index+1}"  ) 
 		)
 
         topic.addToResources(
- 		new  DocumentResource(creater:user, title:"document tittle ${index+1}",description:" document tiitle${index+1}descripion", filePath:"//filepath/grails.github.io/grails-doc/link${index+1}"  ) 
+ 		new  DocumentResource(creator:user, title:"document tittle ${index+1}",description:" document tiitle${index+1}descripion", filePath:"//filepath/grails.github.io/grails-doc/link${index+1}"  ) 
         )
 
       saveObject(topic);
