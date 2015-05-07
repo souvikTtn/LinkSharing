@@ -1,7 +1,7 @@
 package linksharing
 
 class Resource {
-User creater
+User creator
 String title
 String description
 Date dateCreated
