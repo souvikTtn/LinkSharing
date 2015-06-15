@@ -1,5 +1,6 @@
 package linksharing
 
 class UserController {
-static scaffold=true;
+    static scaffold=true
+
 }
