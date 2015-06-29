@@ -19,7 +19,7 @@ class BootStrap {
  void createUsers(){
      User user=new User	(firstName:"ram",email:"rampegu1988@gmail.com",photo: "ram.jpg", username:"rampegu",password:"ram@123",confirmPassword:"ram@123",lastName:"pegu");
       saveObject(user);
-    user=new User(firstName:"umesh",email:"umeshk820@gmail.com",photo: "umesh.jpg", username:"umeshk820",password:"umesh@123",confirmPassword:"umesh@123",lastName:"kumar");
+    user=new User(firstName:"umesh",email:"umeshk820@gmail.com",photo: "umesh.jpg", username:"umeshk820",password:"umesh@123",confirmPassword:"umesh@123",lastName:"kumar",admin: true);
       
 	saveObject(user);
 	}

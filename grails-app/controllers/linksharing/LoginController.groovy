@@ -44,6 +44,12 @@ class LoginController {
         User user = User.findByEmail(email);
 
         if (user?.password == password) {
+            if( user.active==false){
+
+                flash.message = "User is Deactivated by Admin,can't login..."
+                redirect(controller: "login", action: "index");
+                return false;
+            }
             session["user"] = user;
             session["user_id"] = user.id;
             flash.message = "Welcome ${user}"
@@ -53,6 +59,8 @@ class LoginController {
             flash.message = "Please Enter the Correct Credentials"
             redirect(controller: "login", action: "index");
         }
+
+
 
 
     }

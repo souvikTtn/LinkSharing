@@ -10,7 +10,7 @@ class User {
     String lastName
     String photo
     boolean admin = false
-    boolean active = false
+    boolean active = true
     Date dateCreated
     Date lastUpdated
     static transients = ['confirmPassword']
