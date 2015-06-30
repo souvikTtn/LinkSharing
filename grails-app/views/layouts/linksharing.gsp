@@ -22,13 +22,7 @@
     <link rel="shortcut icon" href="${assetPath(src: 'favicon.ico')}" type="image/x-icon">
     <link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <asset:stylesheet src="application.css"/>
     <asset:javascript src="application.js"/>
     <g:layoutHead/>
@@ -54,18 +48,18 @@
 
 
 
-                %{--<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>--}%
-                %{--&nbsp;--}%
+                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                &nbsp;
 
-                %{--<span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>--}%
+                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
 
-                %{--&nbsp;--}%
+                &nbsp;
 
-                %{--<span class="glyphicon glyphicon-file" aria-hidden="true"></span>--}%
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
 
-                %{--&nbsp;--}%
+                &nbsp;
 
-                %{--<span class="glyphicon glyphicon-text-width" aria-hidden="true"></span>--}%
+                <span class="glyphicon glyphicon-text-width" aria-hidden="true"></span>
 
 
 

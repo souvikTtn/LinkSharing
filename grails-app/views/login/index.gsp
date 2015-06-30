@@ -6,7 +6,7 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="linksharing.User;" %>
+<%@ page import="linksharing.*;" %>
 
 <html>
 <head>
@@ -16,104 +16,226 @@
 </head>
 
 <body>
-<div class="body">
+<div class="container">
+<div class ="row">
+    <div class="col-md-6">
 
-
-
- <div style="border:solid thick;float:left;padding: 0% ;height:30%;width: 40%; overflow: scroll">
-   <div><header>Recent Shares</header></div>
-     <g:each in="${ recentResources}" var="recentRes">
-         <g:render template="post" model="[post:recentRes]"/>
-
-     </g:each>
-
- </div>
-
-
-
-
-<div style="height: 50%;width: 50%; float: right">
-    <div>
-        <g:if test="${flash.message}">
-            <li>${flash.message}</li>
-
-        </g:if>
-    </div>
-    <div style="border:solid thick;float:left;" >
-        <g:form url="[controller:'login',action:'loginHandler']">
-        <table >
-            <caption>SignIn</caption>
-            <tr>
-                <td> Email:</td><td> <g:field type="email" name="email"/> </td>
-            </tr>
-            <tr>
-                <td>Password:</td><td><g:field type="password" name="password"/></td>
-            </tr>
-             <tr>
-                 <td><g:link controller="login" action="forgotPassword">Forgot Password</g:link></td>
-                 <td><g:submitButton name="submit"/></td>
-
-             </tr>
-
-        </table>
-        </g:form>
-
-    </div>
-
-
-    <div style="border:solid thick;float:left; " >
-        %{--<div>--}%
-            %{--<g:renderErrors bean="" as="list" />--}%
-
-
-        %{--</div>--}%
-        <g:uploadForm action="register" controller="login" method="post">
-
-        <table >
-            <caption> SingnUp</caption>
-            <tr>
-                <td>First Name:</td><td><g:textField name="firstName"/></td>
-            </tr>
-            <tr>
-                <td>Last Name:</td><td><g:textField name="lastName"/></td>
-            </tr>
-            <tr>
-                <td>User Name:</td><td><g:textField name="username"/></td>
-            </tr>
-            <tr>
-                <td> Email:</td><td> <g:field type="email" name="email"/> </td>
-            </tr>
-            <tr>
-                <td>Password:</td><td><g:field type="password" name="password"/></td>
-            </tr>
-            <tr>
-                <td>Confirm Password:</td><td><g:field type="password" name="confirmPassword" /></td>
-            </tr>
-            <tr>
-                <td>Image:</td><td><g:field type="file" name="photo"/></td>
-            </tr>
-            <tr>
-                <td colspan="2"><g:submitButton name="submit"/></td>
-            </tr>
-        </table>
-        </g:uploadForm>
-
-    </div>
-</div>
-
-
-    <div style="border:solid thick;float:left;padding: 0% ;height:30%;width: 40%; overflow: scroll">
-        <div><header>Top Posts</header></div>
-        <g:each in="${ topPost}" var="recentRes">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="background-color:powderblue">
+                <h1 style="background-color:#ffa8c7">Latest posts on appliction...</h1>
+            <g:each in="${ recentResources}" var="recentRes">
             <g:render template="post" model="[post:recentRes]"/>
 
-        </g:each>
+            </g:each>
+
+            </div>
+
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div style="background-color:powderblue">
+                <h1 style="background-color:#ffa8c7">Top posts on appliction...</h1>
+                <g:each in="${ topPosts}" var="recentRes">
+                <g:render template="post" model="[post:recentRes]"/>
+
+                </g:each>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
 
     </div>
 
 
+    <div class="col-md-6 ">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div  style="margin: 10px">
+
+                    <g:form url="[controller:'login',action:'loginHandler']" role="form">
+                        <h2 class="form-signin-heading">Please sign in</h2>
+                        <label for="inputEmail" class="sr-only">Email address</label>
+                        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <g:link controller="login" class="alert-link" action="forgotPassword">Forgot Password</g:link>
+                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-info ">
+                            signIn
+                        </button>
+                    </g:form>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <g:if test="${flash.message}">
+                    <div class="alert alert-warning">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Warning!</strong> ${flash.message + "  "};
+                    </div>
+
+
+                </g:if>
+
+
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="container" style="margin: 10px;">
+                    <div class="row"><h2 style="align-text: center;">Sign up</h2>
+                    </div>
+
+                    <g:uploadForm action="register" controller="login" method="post" role="form">
+                        <div class="form-group">
+                            <label for="firstname" class="col-md-2">
+                                First Name:
+                            </label>
+                            <div class="col-md-10">
+                                <input type="text" name="firstName" class="form-control" id="firstname" placeholder="Enter First Name">
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastname" class="col-md-2">
+                                Last Name:
+                            </label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" name="lastName" id="lastname" placeholder="Enter Last Name">
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="col-md-2">
+                                Username:
+                            </label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emailaddress" class="col-md-2">
+                                Email address:
+                            </label>
+                            <div class="col-md-10">
+                                <input type="email" name="email" class="form-control" id="emailaddress" placeholder="Enter email address">
+                                <p class="help-block">
+                                    Example: yourname@domain.com
+                                </p>
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="col-md-2">
+                                Password:
+                            </label>
+                            <div class="col-md-10">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
+                                <p class="help-block">
+                                    Min: 6 characters
+                                </p>
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword" class="col-md-2">
+                                ConfirmPassword:
+                            </label>
+                            <div class="col-md-10">
+                                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password">
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label for="uploadimage" class="col-md-2">
+                                Upload Image:
+                            </label>
+                            <div class="col-md-10">
+                                <input type="file" name="photo" id="uploadimage">
+                                <p class="help-block">
+                                    Allowed formats: jpeg, jpg, gif, png
+                                </p>
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-10">
+                                <button type="submit" class="btn btn-info">
+                                    Register
+                                </button>
+                            </div>
+                        </div>
+                    </g:uploadForm>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        %{--<div class="row">--}%
+            %{--<div class="col-md-12">--}%
+                %{--<g:renderErrors bean="${user}" as="list">--}%
+
+                %{--</g:renderErrors>--}%
+            %{--</div>--}%
+        %{--</div>--}%
+
+    </div>
+
+</div>
 
 </div>
 
 </body>
 </html>
+
+
+
+
+

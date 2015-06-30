@@ -1,6 +1,6 @@
 package linksharing
 
-import linksharing.*
+
 
 import org.springframework.web.multipart.MultipartFile
 
@@ -9,32 +9,20 @@ class LoginController {
     def mailService
 
     def index() {
-        //Recent Shares
-        List<Resource> rlist = Resource.createCriteria().list(sort: 'lastUpdated', order: 'desc', max: 3, offset: 0) {
-            'topic' {
-                eq('visibility', Visibility.PUBLIC)
-            }
-        }
-        //Top post according to hightest  of ratings
-        List<ResourceRating> rr = ResourceRating.createCriteria().list() {
-            projections {
-                groupProperty 'resource'
-                sum('score', 'sumscore')
-            }
-            'resource' {
-                'topic' {
-                    eq('visibility', Visibility.PUBLIC)
-                }
-            }
-            order('sumscore', 'desc')
-            maxResults(2)
 
-        }
+        List<Resource> recentResources = userService.recentResources();
 
+        List<ResourceRating> topPosts = userService.topPosts();
+//        if(params["user"]){
+//            User user=params["user"]
+//            render(view:"index",model: [user:user,recentResources:recentResources, topPosts: topPosts])
+//        }
+//        else{
+//
+//            render( view: "index",model:  [recentResources:recentResources, topPosts: topPosts])
+//        }
+        [recentResources:recentResources, topPosts: topPosts]
 
-        List<Resource> topPost = rr.collect { it.first() }
-
-        [recentResources: rlist, topPost: topPost]
     }
 
     def loginHandler() {
@@ -77,6 +65,8 @@ class LoginController {
             println "Size: ${uploadedFile.size}"
             println "ContentType: ${uploadedFile.contentType}"
 
+
+
             def status = userService.uploadFile(uploadedFile, uploadedFile.originalFilename, "/home")
             println("File Stat :- " + status)
         }
@@ -104,7 +94,7 @@ class LoginController {
             user.errors.each {
                 println it
             }
-            redirect(controller: 'login', action: 'index')
+            redirect(controller: 'login', action: 'index',params: [user:user])
         }
     }
 
@@ -112,6 +102,7 @@ class LoginController {
         session.invalidate()
         redirect(url: "/")
     }
+
 
     def recoverPassword() {
         String email = params["email"]
