@@ -88,7 +88,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <g:if test="${flash["user"]}">
+                <g:if test="${flash["message"]}">
                     <div class="alert alert-warning">
                         <a href="#" class="close" data-dismiss="alert">&times;</a>
                         <strong>Warning!</strong> ${flash.message + "  "}
@@ -115,16 +115,16 @@
 
             <div class="col-md-12">
 
-                <div class="container" style="margin: 10px;">
+                <div  style="margin: 10px;">
                     <div class="row"><h2 style="align-text: center;">Sign up</h2>
                     </div>
 
                     <g:uploadForm action="register" controller="login" method="post" role="form">
                         <div class="form-group">
-                            <label for="firstname" class="col-md-2">
+                            <label for="firstname" class="col-md-4">
                                 First Name:
                             </label>
-                            <div class="col-md-10">
+                            <div class="col-md-8">
                                 <input type="text" name="firstName" class="form-control" id="firstname" placeholder="Enter First Name">
                             </div>
 
@@ -132,20 +132,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="lastname" class="col-md-2">
+                            <label for="lastname" class="col-md-4">
                                 Last Name:
                             </label>
-                            <div class="col-md-10">
+                            <div class="col-md-8">
                                 <input type="text" class="form-control" name="lastName" id="lastname" placeholder="Enter Last Name">
                             </div>
 
 
                         </div>
                         <div class="form-group">
-                            <label for="username" class="col-md-2">
+                            <label for="username" class="col-md-4">
                                 Username:
                             </label>
-                            <div class="col-md-10">
+                            <div class="col-md-8">
                                 <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
                             </div>
 
@@ -153,10 +153,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="emailaddress" class="col-md-2">
+                            <label for="emailaddress" class="col-md-4">
                                 Email address:
                             </label>
-                            <div class="col-md-10">
+                            <div class="col-md-8">
                                 <input type="email" name="email" class="form-control" id="emailaddress" placeholder="Enter email address">
                                 <p class="help-block">
                                     Example: yourname@domain.com
@@ -167,10 +167,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password" class="col-md-2">
+                            <label for="password" class="col-md-4">
                                 Password:
                             </label>
-                            <div class="col-md-10">
+                            <div class="col-md-8">
                                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
                                 <p class="help-block">
                                     Min: 6 characters
@@ -179,27 +179,16 @@
 
 
                         </div>
-                        <div class="form-group">
-                            <label for="confirmPassword" class="col-md-2">
-                                ConfirmPassword:
-                            </label>
-                            <div class="col-md-10">
-                                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password">
-
-                            </div>
-
-
-                        </div>
 
 
 
 
                         <div class="form-group">
-                            <label for="uploadimage" class="col-md-2">
+                            <label for="uploadimage" class="col-md-4">
                                 Upload Image:
                             </label>
-                            <div class="col-md-10">
-                                <input type="file" name="photo" id="uploadimage">
+                            <div class="col-md-8">
+                                <input type="file" name="photo" >
                                 <p class="help-block">
                                     Allowed formats: jpeg, jpg, gif, png
                                 </p>
@@ -211,9 +200,9 @@
 
 
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                             </div>
-                            <div class="col-md-10">
+                            <div class="col-md-8">
                                 <button type="submit" class="btn btn-info">
                                     Register
                                 </button>
