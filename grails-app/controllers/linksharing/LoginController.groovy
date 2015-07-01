@@ -13,14 +13,7 @@ class LoginController {
         List<Resource> recentResources = userService.recentResources();
 
         List<ResourceRating> topPosts = userService.topPosts();
-//        if(params["user"]){
-//            User user=params["user"]
-//            render(view:"index",model: [user:user,recentResources:recentResources, topPosts: topPosts])
-//        }
-//        else{
-//
-//            render( view: "index",model:  [recentResources:recentResources, topPosts: topPosts])
-//        }
+
         [recentResources:recentResources, topPosts: topPosts]
 
     }
@@ -94,7 +87,8 @@ class LoginController {
             user.errors.each {
                 println it
             }
-            redirect(controller: 'login', action: 'index',params: [user:user])
+            flash["user"]=user;
+            redirect(controller: 'login', action: 'index')
         }
     }
 

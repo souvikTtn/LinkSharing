@@ -84,12 +84,14 @@
         </div>
 
 
+
+
         <div class="row">
             <div class="col-md-12">
-                <g:if test="${flash.message}">
+                <g:if test="${flash["user"]}">
                     <div class="alert alert-warning">
                         <a href="#" class="close" data-dismiss="alert">&times;</a>
-                        <strong>Warning!</strong> ${flash.message + "  "};
+                        <strong>Warning!</strong> ${flash.message + "  "}
                     </div>
 
 
@@ -101,6 +103,13 @@
         </div>
 
 
+        <div class="row">
+            <div class="col-md-12">
+                <g:renderErrors bean="${flash["user"]}" as="list"/>
+
+
+            </div>
+        </div>
 
         <div class="row">
 
@@ -217,14 +226,6 @@
             </div>
 
         </div>
-
-        %{--<div class="row">--}%
-            %{--<div class="col-md-12">--}%
-                %{--<g:renderErrors bean="${user}" as="list">--}%
-
-                %{--</g:renderErrors>--}%
-            %{--</div>--}%
-        %{--</div>--}%
 
     </div>
 
