@@ -180,6 +180,19 @@
 
                         </div>
 
+                        <div class="form-group">
+                            <label for="confirmPassword" class="col-md-4">
+                                 Confirm Password:
+                            </label>
+                            <div class="col-md-8">
+                                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="confirm password">
+                                <p class="help-block">
+                                    Should be same as password
+                                </p>
+                            </div>
+
+
+                        </div>
 
 
 
@@ -210,6 +223,9 @@
                         </div>
                     </g:uploadForm>
                 </div>
+
+
+
 
 
             </div>
