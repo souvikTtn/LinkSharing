@@ -23,117 +23,201 @@
     <link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
 
+ %{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>--}%
+
+
+
+
     <asset:stylesheet src="application.css"/>
     <asset:javascript src="application.js"/>
     <g:layoutHead/>
 </head>
+
 <body>
-<div id="grailsLogo" role="banner">
-    %{--<asset:image src="skin/social_media_banner.jpg" alt="LinksharingApp..."/>--}%
-    <span style="font-size: xx-large">Linksharing Application
-    </span>
+<div class="container-fluid">
+    <div class="row">
 
+        <div class="col-md-12">
 
-    <div style="float: right; margin-top: 0px;">
-        <%
-            if(session["user_id"]!=null)
-            {
-                User user=session["user"]
-
-        %>
-        <div style="float: right;" >
-
-            <div style="position: relative;float: right">
-
-
-
-
-                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                &nbsp;
-
-                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-
-                &nbsp;
-
-                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-
-                &nbsp;
-
-                <span class="glyphicon glyphicon-text-width" aria-hidden="true"></span>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="header">
+                        %{--<h1>LinkSharing</h1>--}%
 
 
 
 
 
+                        <nav class="navbar navbar-inverse">
+                            <div class="container-fluid">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+
+                                    </button>
+                                    <a class="navbar-brand" href="#">LinkSharing</a>
+                                </div>
+                                <div class="collapse navbar-collapse" id="myNavbar">
+
+                                    <ul class="nav navbar-nav">
+                                        <li class="active"><g:link controller="login" action="index">Home</g:link></li>
+                                        <%
+                                            if(session["user_id"]!=null)
+                                            {
+
+                                        %>
+                                        <li ><g:link controller="home" action="dashboard">DashBoard</g:link></li>
+                                        <% } %>
+
+                                    </ul>
+                                    <%
+                                        if(session["user_id"]!=null)
+                                        {
+                                            User user=session["user"]
+
+                                    %>
 
 
 
-                <img src="/home/${user.photo}" name="submit" type="image"style="height: 25px ;width: 20px;padding: 0px"/> ${user.username}
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li> <form class="navbar-form navbar-left" role="search">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Search">
+                                            </div>
+                                            <button type="submit" class="btn btn-default">Submit</button>
+                                        </form>
+                                        </li>
 
-                <input id="dropSubmit" name="dropSubmit" type="button" style="height: 20px ;width: 20px;padding: 0px">
+                                        <li><button type="button" class="btn btn-default btn-lg" aria-label="Left Align">
+                                            Topic
+                                        </button>
+                                        </li>
+                                        <li>
 
-                <div class="dropOption"  style="position:absolute;width: 100%;height:200px">
-                    <g:link controller="profile" action="editProfile" name="userProfile"><span style="border:solid;width:50px;float:left;clear: right">Profile</span></g:link>
-                    <g:if test="${user.admin==true}">
-                        <g:link controller="user" action="allUserList"> <span style="border: solid;float: left;;width:50px;clear: left">Users</span></g:link>
-                        <span style="border: solid;float: left;width:50px;clear: left">Topic</span>
+                                            <button type="button" class="btn btn-default btn-lg">
+                                                Link Post
+                                            </button>
+                                        </li>
+                                        <li>
 
-                        <span style="border: solid;float: left;width:50px;clear: left">Posts</span>
-                    </g:if>
-                    <g:link controller="login" action="logout" name="logoutAc"><span style="border: solid;width:50px;float: left;clear: left">Logout</span></g:link>
+                                            <button type="button" class="btn btn-default btn-lg">
+                                                Docoument Post
+                                            </button>
+                                        </li>
+                                        <li>
+
+                                            <button type="button" class="btn btn-default btn-lg">
+                                                Send Invitation
+                                            </button>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li> <g:link controller="profile" action="editProfile" name="userProfile">Profile</g:link></li>
+                                                <g:if test="${user.admin==true}">
+                                                <li><g:link controller="user" action="allUserList">Users</g:link></li>
+                                                <li><a href="#">Posts</a></li>
+                                                <li><a href="#">Topics</a></li>
+                                                </g:if>
+                                                <li><g:link controller="login" action="logout" name="logoutAc"> Log out</g:link></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+
+                                    <% } %>
+                                </div>
+                            </div>
+                        </nav>
+
+
+
+
+
+
+
+
+
+
+
+                        %{--dfasdf--}%
+
+
+
+
+                    </div>
                 </div>
 
             </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <g:layoutBody/>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="footer">
+                        Copyright © intelligrape pvt ltd.
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
         </div>
-        <%}%>
-        <div style="float: right">
-            <form id="search-form" name="search" action="" method="get">
-                <input type="text" placeholder="Search" name="" class="placeholder" style=" height: 30px;">
-                <input  name="submit" type="submit" value="submit" style="float:right; height: 25px ;width: 70px;padding: 0px">
-            </form>
-        </div>
+
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </div>
 
-<g:layoutBody/>
-<div class="footer" role="contentinfo"></div>
-<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
+
+
+
 </body>
 </html>
 
 
 
-<script type="text/javascript">
-    $(function() {
-        $('#dropSubmit').click(function() {
-            $('.dropOption').toggle(1000);
-            return false;
-        });
 
-    });
 
-</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

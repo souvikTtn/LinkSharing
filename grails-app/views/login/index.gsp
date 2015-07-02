@@ -121,42 +121,42 @@
 
                     <g:uploadForm action="register" controller="login" method="post" role="form">
                         <div class="form-group">
-                            <label for="firstname" class="col-md-4">
+                            <label for="firstname" >
                                 First Name:
                             </label>
-                            <div class="col-md-8">
+
                                 <input type="text" name="firstName" class="form-control" id="firstname" placeholder="Enter First Name">
-                            </div>
+
 
 
                         </div>
 
                         <div class="form-group">
-                            <label for="lastname" class="col-md-4">
+                            <label for="lastname" >
                                 Last Name:
                             </label>
-                            <div class="col-md-8">
+
                                 <input type="text" class="form-control" name="lastName" id="lastname" placeholder="Enter Last Name">
-                            </div>
+
 
 
                         </div>
                         <div class="form-group">
-                            <label for="username" class="col-md-4">
+                            <label for="username" >
                                 Username:
                             </label>
-                            <div class="col-md-8">
+
                                 <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
-                            </div>
+
 
 
                         </div>
 
                         <div class="form-group">
-                            <label for="emailaddress" class="col-md-4">
+                            <label for="emailaddress" >
                                 Email address:
                             </label>
-                            <div class="col-md-8">
+                            <div >
                                 <input type="email" name="email" class="form-control" id="emailaddress" placeholder="Enter email address">
                                 <p class="help-block">
                                     Example: yourname@domain.com
@@ -167,10 +167,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password" class="col-md-4">
+                            <label for="password" >
                                 Password:
                             </label>
-                            <div class="col-md-8">
+                            <div >
                                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
                                 <p class="help-block">
                                     Min: 6 characters
@@ -181,10 +181,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="confirmPassword" class="col-md-4">
+                            <label for="confirmPassword" >
                                  Confirm Password:
                             </label>
-                            <div class="col-md-8">
+                            <div >
                                 <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="confirm password">
                                 <p class="help-block">
                                     Should be same as password
@@ -197,10 +197,10 @@
 
 
                         <div class="form-group">
-                            <label for="uploadimage" class="col-md-4">
+                            <label for="uploadimage" >
                                 Upload Image:
                             </label>
-                            <div class="col-md-8">
+                            <div >
                                 <input type="file" name="photo" >
                                 <p class="help-block">
                                     Allowed formats: jpeg, jpg, gif, png
@@ -214,11 +214,12 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                            </div>
-                            <div class="col-md-8">
                                 <button type="submit" class="btn btn-info">
                                     Register
                                 </button>
+                            </div>
+                            <div class="col-md-8">
+
                             </div>
                         </div>
                     </g:uploadForm>
