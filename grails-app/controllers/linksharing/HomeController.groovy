@@ -17,26 +17,26 @@ class HomeController {
 
         //user subscriptions
         List<Subscription> usersubscriptions = Subscription.findAllByUser(user);
+        Integer totalUserSubscription=Subscription.countByUser(user);
         //user created topic
         List<Topic> usertopics = Topic.findAllByUser(user)
+        Integer totalUserCreatedTopic= Topic.countByUser(user)
+
         //top 5 subscription as per recently added topic in it
-        List<Subscription> subscriptionsTop5 = Subscription.findAllByUser(user, [offset: 0, max: 5, sort: "topic.lastUpdated", order: "desc"])
-//        List<Subscription> subscriptionsTop5= Subscription.createCriteria().list{
-//            projections{
-//                groupProperty('topic')
-//            }
-//
-//            eq('user',user)
-//            "topic"{
-//                "resources"{
-//                    order('lastUpdated','desc')
-//                }
-//            }
-//
-//
-//            maxResults(5)
-//
-//        }
+        List<Topic> subscriptionsTop5Topic = Subscription.createCriteria().list{
+            projections{
+                property('topic')
+            }
+            eq('user',user)
+            'topic'{
+                'resources'{
+                    order('lastUpdated','desc')
+                }
+
+            }
+            maxResults(5)
+
+        }
 
         // trending topics
         def a = Resource.createCriteria().list(max: 3, offset: 0) {
@@ -62,7 +62,7 @@ class HomeController {
         println "hello"
 
         //user inbox item
-        params.max = params.max ?: 3
+        params.max = params.max ?: 5
 
         List<Resource> inboxlist = ReadingItem.createCriteria().list(params) {
             projections {
@@ -76,7 +76,7 @@ class HomeController {
         }
 
 
-        [user: user, usersubscriptions: usersubscriptions, usertopics: usertopics, subscriptionTop5: subscriptionsTop5, inboxlist: inboxlist, total: inboxlist.totalCount, tredingTopics: trendingTopics]
+        [user: user,totalUserSubscription:totalUserSubscription, totalUserCreatedTopic:totalUserCreatedTopic,usersubscriptions: usersubscriptions, usertopics: usertopics, subscriptionsTop5Topic: subscriptionsTop5Topic, inboxlist: inboxlist, total: inboxlist.totalCount, tredingTopics: trendingTopics]
     }
 
 }

@@ -1,13 +1,13 @@
 
 #header {
-    background-color:black;
-    color:white;
-    text-align:center;
+    background-color:white;
+    color:black;
+    /*text-align:center;*/
     padding:5px;
 }
 
 
-webpageData{
+.webpageData{
     background-color: white;
     float:left;
     padding: 5px;
