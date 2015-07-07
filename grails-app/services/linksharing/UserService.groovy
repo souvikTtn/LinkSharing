@@ -12,9 +12,11 @@ class UserService {
 
     }
 
-    User currentUser(String uid) {
 
-        return User.get(uid)
+
+    User currentUser(Integer uid) {
+
+        return User.findById(uid)
 
     }
 
@@ -51,6 +53,97 @@ class UserService {
         List<Resource> topPost = rr.collect { it.first() }
         return topPost
     }
+
+
+
+
+    def userSubscribedTopic(User user){
+        List<Topic> subscribedTopic=Subscription.createCriteria().list {
+
+            projections{
+                property('topic')
+            }
+            eq('user',user)
+
+        }
+        return  subscribedTopic
+
+
+    }
+
+  def top5SubscribedTopic(User user){
+
+      List<Topic> subscriptions = Subscription.createCriteria().list{
+          projections{
+              property('topic')
+          }
+          eq('user',user)
+          'topic'{
+              'resources'{
+                  order('lastUpdated','desc')
+              }
+
+          }
+
+
+      }.unique()
+
+
+      List<Topic> subscriptionsTop5Topic=(subscriptions.size()<5)?subscriptions:subscriptions.subList(0,5)
+
+
+     return subscriptionsTop5Topic
+
+  }
+
+    def trendingTopics(){
+
+        def a = Resource.createCriteria().list(max: 5, offset: 0) {
+            projections {
+                groupProperty('topic')
+                rowCount("a")
+
+            }
+
+            'topic' {
+                eq('visibility', Visibility.PUBLIC)
+
+
+            }
+
+            order("a", "desc")
+        }
+
+
+
+        List<Topic> trendingTopics = a.collect { it.first() }
+        return  trendingTopics
+    }
+
+
+    def userSubscriptions(User user){
+
+         List<Subscription > usersubscriptions = Subscription.findAllByUser(user);
+        return   usersubscriptions
+
+    }
+
+    def userSubscriptionsCount(User user){
+        return Subscription.countByUser(user);
+
+    }
+
+    def userTopics(User user){
+
+        return Topic.findAllByUser(user)
+
+    }
+    def userTopicsCount(User user){
+
+        return Topic.countByUser(user)
+
+    }
+
 
 
     def String uploadFile(MultipartFile file,

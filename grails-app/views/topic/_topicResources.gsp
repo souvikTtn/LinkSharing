@@ -4,12 +4,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row"  style="margin-top: 10px ;border:outset ;" >
-                <div class="col-md-4"> <div style="font-size: 18px;font-weight: bold">Inbox(${total})</div></div>
+                <div class="col-md-4"> <div style="font-size: 18px;font-weight: bold">Post:"${topic?.name}"</div></div>
                 <div class="col-md-8">
                     <div>
-                    <form>
-                        <input type="text" placeholder="search"/>&nbsp;<input class="btn btn-info" type="submit" value="search"/>
-                    </form>
+                        <form>
+                            <input type="text" placeholder="search"/>&nbsp;<input class="btn btn-info" type="submit" value="search"/>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@
 
                 <div class="col-md-12" >
 
-                  <% inboxlist.each {post ->  %>
+                    <% resources.each {post ->  %>
 
 
 
@@ -53,13 +53,18 @@
                                 <div class="col-md-12">${post.description}</div>
                             </div>
                             <div class="row">
-                              <div class="col-md-4">
-                                <g:if test="${post.instanceOf(DocumentResource)}"><g:link controller="documentResource" action="downLoadDocoument" params="[filePath:post.creator.photo]" > Download</g:link>                               </g:if>
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-4">
+                                    <g:if test="${post.instanceOf(DocumentResource)}"><g:link controller="documentResource" action="downLoadDocoument" params="[filePath:post.creator.photo]" > Download</g:link>                               </g:if>
                                     <g:else><a href="${post.url}"> ViewFullSite</a> </g:else>
 
 
                                 </div>
-                                <div class="col-md-4"><g:link controller="readingItem" action="markAsRead" params='[rid:"${post.id}"]'>MarkAsRead</g:link></div>
+                                <div class="col-md-4">
+
+                                </div>
                                 <div class="col-md-4"> <g:link controller="resource" action="showPost" params='[rid:"${post.id}"]'>ViewPost</g:link></div>
 
 
@@ -85,7 +90,7 @@
 
             <div class="row">
                 <div class="col-md-12" style="border: outset">
-                    <g:paginate total="${total}" max="5" params="[q:params.q]"/>
+                    %{--<g:paginate total="${total}" max="5" params="[q:params.q]"/>--}%
 
                 </div>
             </div>
@@ -95,6 +100,4 @@
 
     </div>
 </div>
-
-
 

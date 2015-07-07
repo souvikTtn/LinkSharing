@@ -4,18 +4,18 @@
 
 
 <div>
-    <div class="row">
+    <div class="row" style="margin-top: 10px ;">
         <div class="col-md-12">
             <div class="row"  style="margin-top: 10px ;border:outset ;" >
-                <div class="col-md-6"> <div style="font-size: 18px;font-weight: bold">Trending Topics</div></div>
-
+                <div class="col-md-6"> <div style="font-size: 18px;font-weight: bold"> Topics</div></div>
+                <div class="col-md-6"> <form><input type="text" placeholder="search"/> </form></div></div>
             </div>
 
             <div class="row">
 
                 <div class="col-md-12" >
 
-                    <% tredingTopics.each {Topic topic ->  %>
+                    <% topics.each {Topic topic ->  %>
 
 
                     <div class="row" style="margin-top: 2px;margin-bottom: 2px; ; border: outset;" >
@@ -67,6 +67,8 @@
                                             <div class="row">
 
                                                 <div class="col-md-4">
+
+
                                                     <%   if(Subscription.countByUserAndTopic(user,topic)==1)  {   %>
                                                     <%   if(topic.user.id!= user.id)  {   %>
 
@@ -160,7 +162,7 @@
 
 
     </div>
-</div>
+
 
 
 

@@ -3,7 +3,11 @@ package linksharing
 class TopicController {
     def userService = new UserService()
 
-    def createTopic(Topic topic) {
+    def create(){
+
+    }
+
+    def save(Topic topic) {
         User user = session["user"]
         topic.user = user
 
@@ -15,10 +19,12 @@ class TopicController {
             }
 
             flash.message = "topic created succesfully"
-            render(view: "/home/_createTopic")
+
         } else {
-            render topic.errors
+            flash.topic=topic;
         }
+
+        redirect(action: "create")
     }
 
     def topicShow(String tid) {
@@ -51,6 +57,53 @@ class TopicController {
 
 
     }
+
+    def deleteTopic(String tid) {
+        // throwing refrential integrity exception by database
+//        int status=Topic.executeUpdate("delete Topic as topic where topic.id=:tid",[tid:tid.toLong()] )
+//        if(status!=0){
+//            redirect( controller: "home",action: "dashboard")
+//        }else {
+//             render "failure"
+//        }
+
+        Topic topic = Topic.findById(tid)
+        topic.delete(flush: true, failOnError: true)
+        render "success"
+
+
+    }
+
+    def editTopic(String tid, String topicName) {
+
+        int status = Topic.executeUpdate("update Topic as topic set topic.name =:topicName where topic.id=:tid", [topicName: topicName, tid: tid.toLong()])
+        if (status != 0) {
+            render "success"
+        } else {
+            render "failure"
+        }
+
+
+    }
+
+    def changeVisibility(String tid) {
+
+        println params
+        Visibility visibility = params["visibility"];
+
+        int status = Topic.executeUpdate("update Topic as topic set topic.visibility=:visibility  where topic.id=:tid", [visibility: visibility, tid: tid.toLong()])
+        if (status != 0) {
+            render "success visibility changed"
+        } else {
+            render "failure in changing visibility"
+        }
+
+
+    }
+
+
+
+
 
 
 }

@@ -1,4 +1,3 @@
-
 <%@ page import="linksharing.*"%>
 <% User user =session["user"]%>
 
@@ -7,15 +6,18 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row"  style="margin-top: 10px ;border:outset ;" >
-                <div class="col-md-6"> <div style="font-size: 18px;font-weight: bold">Trending Topics</div></div>
+                <div class="col-md-6"> <div style="font-size: 18px;font-weight: bold">Topics</div></div>
+                <div class="col-md-6">
 
+                    <form><input type="text" placeholder="search"/> </form>
+                </div>
             </div>
 
             <div class="row">
 
                 <div class="col-md-12" >
 
-                    <% tredingTopics.each {Topic topic ->  %>
+                    <% topics.each {Topic topic ->  %>
 
 
                     <div class="row" style="margin-top: 2px;margin-bottom: 2px; ; border: outset;" >
@@ -172,22 +174,6 @@
         });
     });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

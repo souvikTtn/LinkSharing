@@ -1,8 +1,16 @@
 package linksharing
 
 class LinkResourceController {
+def userService
 
-    def createUserLinkResource() {
+    def create(){
+        User user=session["user"];
+        List<Topic> subscribedTopics=userService.userSubscribedTopic(user)
+        [subscribedTopics:subscribedTopics]
+
+    }
+
+    def save() {
 
 
         LinkResource linkResource = new LinkResource(params)
@@ -20,14 +28,38 @@ class LinkResourceController {
                     ReadingItem readingItem = new ReadingItem(isRead: false, user: it.user, resource: linkResource)
                     readingItem.save()
                 }
-                render "link document created succfuly"
+              flash.message= "link document created succfuly"
             }
         } else {
-            render linkResource.errors
+            flash.linkResource=linkResource.errors
 
         }
 
 
+        redirect(controller: 'linkResource',action: 'create')
+
+
     }
+
+    def editLinkResource(){
+
+       Resource resource=Resource.findById(params.rid);
+        resource.properties=params
+        if( resource.validate()){
+            resource.save(flush: true,failOnError: true)
+            println resource.properties
+            flash.message="succesfuly updated"
+
+
+        }else {
+            flash.resource=resource;
+
+
+        }
+        redirect(controller: 'resource',action:'showPost',params: [rid:params.rid])
+
+
+    }
+
 
 }

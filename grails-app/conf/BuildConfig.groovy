@@ -76,5 +76,6 @@ grails.project.dependency.resolution = {
         //compile ":handlebars-asset-pipeline:1.3.0.3"
         compile ":console:1.5.5"
         compile ":mail:1.0.7"
+        runtime ':twitter-bootstrap:3.3.1'
     }
 }

@@ -1,6 +1,7 @@
 package linksharing
 
 class ResourceController {
+    def userService
 
     def showPost(String rid) {
 
@@ -17,9 +18,32 @@ class ResourceController {
 
         }
 
+        if(session["user_id"]){
+            request.setAttribute("trendingTopics",userService.trendingTopics())
+            println request.getAttribute("trendingTopics")*.id
+        }
 
-        [resource: resource, ratedUserCount: ratedUserCount, showToEditAndDelete: showToEditAndDelete]
+
+
+        [post: resource, ratedUserCount: ratedUserCount, showToEditAndDelete: showToEditAndDelete]
 
 
     }
+
+
+    def deleteResource(String rid){
+        Resource resource=Resource.findById(rid)
+        resource.delete(flush:true)
+
+
+    }
+
+    def test(){
+
+        User user =session["user"];
+        def subscribedTopics=userService.userTopics(user)
+        render(template: "/home/createLinkPost" ,Model: [subscribedTopics:subscribedTopics])
+
+    }
+
 }

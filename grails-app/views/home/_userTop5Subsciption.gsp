@@ -48,10 +48,10 @@
                                     <div class="topicName">
                                     <h3> <g:link controller="topic" action="topicShow" params='[tid:"${topic.id}"]'>${topic.name}</g:link></h3></div>
                                 </div>
-                                <div topic="topic_edit">
-                                    <form>
-                                        <input type="text" value="${topic.name}"/>&nbsp;<input class="btn btn-info" type="submit" value="save"/><input class="btn btn-info" type="submit" value="cancel"/>
-                                    </form>
+                                <div class="topic_editDiv" hidden="hidden">
+                                    <g:form controller="topic" action="editTopic">
+                                        <input type="text" name="topicName" value="${topic.name}"/> <g:hiddenField name="tid" value="${topic.id}"/> &nbsp;<input class="btn btn-info" type="submit" value="save"/><input class="btn btn-info" type="button" value="cancel"/>
+                                    </g:form>
 
 
                                 </div>
@@ -71,11 +71,11 @@
                                             <%   if(Subscription.countByUserAndTopic(user,topic)==1)  {   %>
                                                     <%   if(topic.user.id!= user.id)  {   %>
 
-                                            <g:link controller="user" action="userPublicProfile" params="[userId:topic.user.id]">unsubscribe</g:link>
+                                            <g:link controller="subscription" action="unSubcribeTopic" params="[tid: topic.id]">unsubscribe</g:link>
 
                                                         <%  }   %>
                                             <%  }else {   %>
-                                            <g:link controller="user" action="userPublicProfile" params="[userId:topic.user.id]">Subscribe</g:link>
+                                            <g:link controller="subscription" action="subscribeTopic" params="[tid: topic.id]">Subscribe</g:link>
 
                                             <%  }  %>
 
@@ -100,32 +100,37 @@
                         <div class="row">
 
                             <div class="col-md-3">
-                                <div>
-                                <select class="form-control" name="seriousness">
-                                <option >Serious</option>
-                                <option>VersySerious</option>
-                                <option>Casual</option>
+                                <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Seriousness
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(controller: "subscription",action: "changeSeriousness",params:[tid:topic.id,seriousness:"SERIOUS"])}">Serious</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(controller: "subscription",action: "changeSeriousness",params:[tid:topic.id,seriousness: "VERY_SERIOUS"])}">Very Serious</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(controller: "subscription",action: "changeSeriousness",params:[tid:topic.id,seriousness: "CASUAL"])}">Casual</a></li>
 
-                                </select>
+
+                                    </ul>
                                 </div>
                             </div>
 
                             <div class="col-md-2"><input class="btn btn-info" type="submit" value="invite"/></div>
                            <% if(user.admin==true || topic.user.id ==session["user_id"]){      %>
                             <div class="col-md-3">
-                                <div>
-                                    <select class="form-control" name="visibility">
-                                        <option >PUBLIC</option>
-                                        <option>PRIVATE</option>
-                                    </select>
-                                </div>
 
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Seriousness
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(controller: "topic",action: "changeVisibility",params:[tid:topic.id,visibility:"PUBLIC"])}">PUBLIC</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(controller: "topic",action: "changeVisibility",params:[tid:topic.id,visibility:"PRIVATE"])}">PRIVATE</a></li>
 
+                                </ul>
+                            </div>
 
                             </div>
 
-                            <div class="col-md-2"><input class="btn btn-info" type="submit" value="edit"/></div>
-                            <div class="col-md-2"><input class="btn btn-info" type="submit" value="delete"/></div>
+                            <div class="col-md-2"><input  type="submit"  class="editTopic" value="edit"/></div>
+                            <div class="col-md-2"><a href="${createLink(controller: "topic",action: "deleteTopic",params:[tid:topic.id])}" class="btn btn-info" role="button">Delete</a></div>
                             <% } %>
                         </div>
 
@@ -161,6 +166,13 @@
 
 
 
+<script>
+    $(document).ready(function(){
+        $(".editTopic").click(function(){
+            $(".topic_editDiv").toggle();
+        });
+    });
+</script>
 
 
 
@@ -174,65 +186,3 @@
 
 
 
-
-%{--<table align="left" border="1" cellpadding="1" cellspacing="1" style="width:450px ;height: 300px">--}%
-    %{--<thead>--}%
-    %{--<tr>--}%
-        %{--<th colspan="2" scope="row">--}%
-            %{--<div style=" padding: 5px 10px;">Treding Topics</div>--}%
-        %{--</th>--}%
-    %{--</tr>--}%
-    %{--</thead>--}%
-    %{--<tbody>--}%
-    %{--<% tredingTopics.each {Topic topic-> %>--}%
-
-
-    %{--<tr>--}%
-        %{--<th scope="row" style="text-align: left;">--}%
-            %{--<div>--}%
-                %{--<div style="float: left">--}%
-                    %{--<p>&nbsp;&nbsp;<g:link controller="user" action="userPublicProfile" params="[userId:topic.user.id]">--}%
-                        %{--<g:if test="${topic.user.photo}">--}%
-                            %{--<img style="border: 4px groove black" alt="BlankImage"src="${resource(dir:'home', file:fieldValue(bean:topic.user, field:'photo'))}" width="80" height="100"/>--}%
-                        %{--</g:if>--}%
-                        %{--<g:else>--}%
-                            %{--<g:img dir="images" file="userDefault.png" width="100" height="100"/>--}%
-
-                        %{--</g:else></g:link></p>--}%
-                %{--</div>--}%
-
-                %{--<div style="float: right; width: 290px;">--}%
-                    %{--<div>--}%
-                        %{--<div style="float:inherit;">--}%
-
-
-
-                        %{--</div>--}%
-
-                        %{--<div style="float: left;">--}%
-                            %{--<g:link controller="home" action="dashboard">Unsubscribe&nbsp;&nbsp;</g:link>--}%
-                        %{--</div>--}%
-                        %{--<div style="float: left;">--}%
-
-                            %{--<p>Subscription</p>--}%
-                            %{--<p>${topic.subscriptions.size()}</p>--}%
-                        %{--</div>--}%
-                        %{--<div style="float: right">--}%
-                            %{--<p>Posts</p>--}%
-                            %{--<p>${topic.resources.size()}</p>--}%
-                        %{--</div>--}%
-                        %{--<div style="float:inherit;">--}%
-                            %{--<select name="seriousness"><option value="Serious">Serious</option><option value="VerySerious">VerySerious</option> </select> <select name="visibility"><option value="PRIVATE">PRIVATE</option><option value="PUBLIC">PUBLIC</option>&nbsp;&nbsp; </select>&nbsp; <img alt="mail" height="23" src="/linksharing/home/message.jpeg" title="mail" width="23" />--}%
-                            %{--<img alt="mail" height="23" src="/linksharing/home/editPage.jpeg" title="mail" width="23" />--}%
-                            %{--<img alt="mail" height="23" src="/linksharing/home/delete.jpeg" title="mail" width="23" />--}%
-                        %{--</div>--}%
-                    %{--</div>--}%
-                %{--</div>--}%
-
-            %{--</div>--}%
-        %{--</th>--}%
-    %{--</tr>--}%
-    %{--<% }%>--}%
-
-    %{--</tbody>--}%
-%{--</table>--}%

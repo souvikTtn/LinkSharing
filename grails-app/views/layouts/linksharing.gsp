@@ -23,7 +23,12 @@
     <link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
 
- %{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>--}%
+
+
+    <r:require module="jquery"/></span>
+    <r:require module="jquery-ui"/>
+    <r:layoutResources/>
+
 
 
 
@@ -42,11 +47,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <div id="header">
-                        %{--<h1>LinkSharing</h1>--}%
-
-
-
-
 
                         <nav class="navbar navbar-inverse">
                             <div class="container-fluid">
@@ -60,6 +60,7 @@
                                     <a class="navbar-brand" href="#">LinkSharing</a>
                                 </div>
                                 <div class="collapse navbar-collapse" id="myNavbar">
+
 
                                     <ul class="nav navbar-nav">
                                         <li class="active"><g:link controller="login" action="index">Home</g:link></li>
@@ -82,36 +83,64 @@
 
 
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li> <form class="navbar-form navbar-left" role="search">
+                                        <li> <g:form controller="search" action="globalSearch" class="navbar-form navbar-left" role="search">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Search">
+                                                <input type="text" name="searchKey" class="form-control" placeholder="Search" required/>
                                             </div>
-                                            <button type="submit" class="btn btn-default">Submit</button>
-                                        </form>
+                                            <button type="submit" class="btn btn-default">Search</button>
+                                        </g:form>
                                         </li>
 
-                                        <li><button type="button" class="btn btn-default btn-lg" aria-label="Left Align">
-                                            Topic
-                                        </button>
-                                        </li>
-                                        <li>
 
-                                            <button type="button" class="btn btn-default btn-lg">
-                                                Link Post
-                                            </button>
-                                        </li>
-                                        <li>
+                                    <li>
 
-                                            <button type="button" class="btn btn-default btn-lg">
-                                                Docoument Post
-                                            </button>
-                                        </li>
-                                        <li>
+                                        <a href="" onclick="createTopic();return false" data-toggle="modal" title="create Topic" style="text-decoration: none">
+                                            <span class="glyphicon glyphicon-comment" style="font-size: 30px "/>
+                                        </a>
+                                    </li>
+                                    <li>
 
-                                            <button type="button" class="btn btn-default btn-lg">
-                                                Send Invitation
-                                            </button>
-                                        </li>
+                                        <a href="" onclick="sendInvitation();return false" data-toggle="modal" title="Send invitation" style="text-decoration: none">
+                                            <span class="glyphicon glyphicon-envelope" style="font-size: 30px"/>
+                                        </a>
+                                    </li>
+                                    <li>
+
+                                        <a href="" onclick="createLinkResource();return false" data-toggle="modal" title="Share Link" style="text-decoration: none">
+                                            <span class="glyphicon glyphicon-link" style="font-size: 30px "/>
+                                        </a>
+                                    </li>
+                                    <li>
+
+                                        <a href="" onclick="createDocumentResource();return false" data-toggle="modal" title="Share Document" style="text-decoration: none">
+                                            <span class="glyphicon glyphicon-file" style="font-size: 30px "/>
+                                        </a>
+                                    </li>
+
+                                   %{--<li>--}%
+                                       %{--<g:link action="create" controller="topic" data-toggle="modal" title="create Topic" style="text-decoration: none">--}%
+                                           %{--<span class="glyphicon glyphicon-comment" style="font-size: 30px "/>--}%
+                                       %{--</g:link>--}%
+
+                                   %{--</li>--}%
+
+                                   %{--<li>--}%
+                                       %{--<g:link action="invitation" controller="home"   data-toggle="modal" title="Send invitation" style="text-decoration: none">--}%
+                                           %{--<span class="glyphicon glyphicon-envelope" style="font-size: 30px"/>--}%
+                                       %{--</g:link>--}%
+                                   %{--</li>--}%
+                                    %{--<li>--}%
+                                        %{--<g:link action="create"  controller="linkResource" data-toggle="modal" title="Share Link" style="text-decoration: none">--}%
+                                            %{--<span class="glyphicon glyphicon-link" style="font-size: 30px "/>--}%
+                                        %{--</g:link>--}%
+                                    %{--</li>--}%
+                                   %{--<li>--}%
+                                       %{--<g:link  action="create" controller="documentResource" data-toggle="modal" title="Share Document" style="text-decoration: none">--}%
+                                           %{--<span class="glyphicon glyphicon-file" style="font-size: 30px "/>--}%
+                                       %{--</g:link>--}%
+                                   %{--</li>--}%
+
+
 
                                         <li class="dropdown">
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="caret"></span></a>
@@ -166,6 +195,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div id="footer">
+
+
+
+
                         Copyright © intelligrape pvt ltd.
 
                     </div>
@@ -182,7 +215,34 @@
 </div>
 
 
+<script  type="text/javascript">
 
+
+    var createLinkResource=function()
+    {
+        window.open("${g.createLink(controller: 'linkResource', action: 'create')}",'', 'width=500,height=400');
+
+    }
+    var createDocumentResource=function()
+    {
+        window.open("${g.createLink(controller: 'documentResource', action: 'create')}",'', 'width=500,height=400');
+
+    }
+    var createTopic=function()
+    {
+        window.open("${g.createLink(controller: 'topic', action: 'create')}",'', 'width=500,height=400');
+
+    }
+    var sendInvitation=function()
+    {
+        window.open("${g.createLink(controller: 'home', action: 'invitation')}",'', 'width=500,height=400');
+
+    }
+    var exit=function()
+    {
+        window.close()
+    }
+</script>
 
 </body>
 </html>

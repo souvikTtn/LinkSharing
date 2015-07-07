@@ -1,10 +1,13 @@
 package linksharing
+import grails.plugin.mail.MailService
+import org.apache.commons.validator.routines.EmailValidator
 
 class HomeController {
 
-
+ def userService
+    def mailService
     def index() {
-        if (session["user"]) {
+        if (session["user_id"]) {
             redirect(action: "dashboard")
         } else {
             redirect(controller: "Login", action: "index")
@@ -12,54 +15,29 @@ class HomeController {
     }
 
     def dashboard() {
+
+        Integer uid=session["user_id"]
+
         //current user
-        User user = session["user"]
+        User user = userService.currentUser(uid)
 
         //user subscriptions
-        List<Subscription> usersubscriptions = Subscription.findAllByUser(user);
-        Integer totalUserSubscription=Subscription.countByUser(user);
+        List<Subscription> usersubscriptions = userService.userSubscriptions(user)
+        Integer totalUserSubscription=userService.userSubscriptionsCount(user)
+
         //user created topic
-        List<Topic> usertopics = Topic.findAllByUser(user)
-        Integer totalUserCreatedTopic= Topic.countByUser(user)
+        List<Topic> usertopics =userService.userTopics(user)
+        Integer totalUserCreatedTopic= userService.userTopicsCount(user)
 
         //top 5 subscription as per recently added topic in it
-        List<Topic> subscriptionsTop5Topic = Subscription.createCriteria().list{
-            projections{
-                property('topic')
-            }
-            eq('user',user)
-            'topic'{
-                'resources'{
-                    order('lastUpdated','desc')
-                }
 
-            }
-            maxResults(5)
+        List<Topic> subscriptionsTop5Topic= userService.top5SubscribedTopic(user)
 
-        }
 
         // trending topics
-        def a = Resource.createCriteria().list(max: 3, offset: 0) {
-            projections {
-                groupProperty('topic')
-                rowCount("a")
 
-            }
+        List<Topic> trendingTopics = userService.trendingTopics();
 
-            'topic' {
-                eq('visibility', Visibility.PUBLIC)
-
-
-            }
-
-            order("a", "desc")
-        }
-
-
-
-        List<Topic> trendingTopics = a.collect { it.first() }
-        println "trendingTopics ${trendingTopics}"
-        println "hello"
 
         //user inbox item
         params.max = params.max ?: 5
@@ -75,8 +53,84 @@ class HomeController {
             }
         }
 
-
+        println trendingTopics*.id
         [user: user,totalUserSubscription:totalUserSubscription, totalUserCreatedTopic:totalUserCreatedTopic,usersubscriptions: usersubscriptions, usertopics: usertopics, subscriptionsTop5Topic: subscriptionsTop5Topic, inboxlist: inboxlist, total: inboxlist.totalCount, tredingTopics: trendingTopics]
     }
+
+
+    def invitation(){
+        List<Topic> subscribedTopics
+
+        if(params['topicId']){
+            Topic topic=Topic.findById(params["topicId"])
+            subscribedTopics.add(topic)
+
+        }
+        else{
+            User user=session["user"]
+            subscribedTopics=userService.userSubscribedTopic(user)
+        }
+
+
+
+        [subscribedTopics:subscribedTopics]
+
+
+
+    }
+
+    def invite() {
+        User user=session["user"]
+        boolean valid=true
+        List<String> emails
+        emails = params['email'].toString().split(';')
+
+
+        EmailValidator emailValidator = EmailValidator.getInstance()
+
+        try{
+            emails.each { email ->
+
+                if (!emailValidator.isValid(email)) {
+                    valid=false
+                    throw new Exception()
+                }
+
+            }
+        }
+        catch(Exception e){
+            flash.message="Not a Valid Email Id Set..!please Check ie. 'emailid@domain.com;emailid2@domain.com'"
+            redirect (controller: 'home',action:'invitation' )
+        }
+
+        if(valid) {
+            Topic topic = Topic.findById(params['topicId'])
+            emails.each { email ->
+
+//                //String key=(topic.id+"^"+email).toString()
+//                click the below link..for subscribe
+//                http://localhost:8080/linksharing/subscription/permission/?key=${key}
+
+                mailService.sendMail {
+                    //  async true
+                    to email
+                    subject "Invitation"
+                    body """ Hi,
+                          You are invited by ${user.firstName}  to join this Topic ${topic.name}
+
+
+                            Thanks
+
+                            Regards
+                            LinksharingTeam
+                          """
+                }
+
+            }
+            flash.message = "Invitations Successfully Sends."
+            redirect(controller: 'home',action: 'invitation')
+        }
+    }
+
 
 }

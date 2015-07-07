@@ -9,13 +9,15 @@ class ProfileController {
 
 
         User user = session["user"]
-        List<Subscription> userSubscriptions = Subscription.findAllByUser(user)
+        Integer userSubscriptionCount=userService.userSubscriptionsCount(user)
+        Integer userTopicCount= userService.userTopicsCount(user)
 
-        List<Topic> topicList = Topic.findAllByUser(user)
+        List<Topic> topicList = userService.userTopics(user);
 
 
-        [user: user, topicList: topicList, userSubscriptions: userSubscriptions]
+        [user: user, topicList: topicList,userSubscriptionCount:userSubscriptionCount, userTopicCount:userTopicCount]
     }
+
 
     def updateProfile() {
 

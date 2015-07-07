@@ -1,6 +1,7 @@
 package linksharing
 
 class UserController {
+    def userService
 
 
     def userPublicProfile() {
@@ -12,20 +13,22 @@ class UserController {
 
             if (currentUser.id == user.id || currentUser.admin == true) {
 
-                userTopic = Topic.findAllByUser(user, [max: 3, offset: 0, sort: 'lastUpdated', order: 'desc'])
+                userTopic = Topic.findAllByUser(user, [sort: 'lastUpdated', order: 'desc'])
             } else {
 
-                userTopic = Topic.findAllByUserAndVisibility(user, Visibility.PUBLIC, [max: 3, offset: 0, sort: 'lastUpdated', order: 'desc'])
+                userTopic = Topic.findAllByUserAndVisibility(user, Visibility.PUBLIC, [sort: 'lastUpdated', order: 'desc'])
             }
 
         } else {
 
-            userTopic = Topic.findAllByUserAndVisibility(user, Visibility.PUBLIC, [max: 3, offset: 0, sort: 'lastUpdated', order: 'desc'])
+            userTopic = Topic.findAllByUserAndVisibility(user, Visibility.PUBLIC, [sort: 'lastUpdated', order: 'desc'])
         }
 
 
+        Integer userSubscriptionCount = userService.userSubscriptionsCount(user)
+        Integer userTopicCount = userService.userTopicsCount(user)
 
-        List<Resource> resourceonPublicTopic = Resource.createCriteria().list(max: 3, offset: 0) {
+        List<Resource> resourceonPublicTopic = Resource.createCriteria().list() {
 
             eq("creator", user)
             "topic" {
@@ -33,7 +36,7 @@ class UserController {
             }
         }
 
-        [user: user, userTopic: userTopic, resourceonPublicTopic: resourceonPublicTopic]
+        [user: user, userTopic: userTopic, resourceonPublicTopic: resourceonPublicTopic, userSubscriptionCount: userSubscriptionCount, userTopicCount: userTopicCount]
     }
 
 
