@@ -58,6 +58,31 @@ class HomeController {
     }
 
 
+    def inboxFilter(){
+
+        params.max = params.max ?: 5
+        Integer uid=session["user_id"]
+        User user = userService.currentUser(uid)
+
+        List<Resource> inboxlist = ReadingItem.createCriteria().list(params) {
+            projections {
+                property 'resource'
+            }
+            eq('user', user)
+            eq('isRead', false)
+            'resource' {
+                order('lastUpdated', 'desc')
+            }
+        }
+
+        render(template:"userInbox",model:[inboxlist: inboxlist, total: inboxlist.totalCount])
+
+    }
+
+
+
+
+
     def invitation(){
         List<Topic> subscribedTopics
 

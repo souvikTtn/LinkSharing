@@ -85,8 +85,11 @@
 
             <div class="row">
                 <div class="col-md-12" style="border: outset">
-                    <g:paginate total="${total}" max="5" params="[q:params.q]"/>
+                    %{--<g:paginate total="${total}" max="5" params="[q:params.q]"/>--}%
 
+                    <div class="paginateButtons">
+                        <util:remotePaginate total="${total}" update="userInboxResultDiv" action="inboxFilter" params="[uid:params.uid]" pageSizes="[5: '5 on Page',10:'10 on Page',15:'15 on Page']"  />
+                    </div>
                 </div>
             </div>
 
