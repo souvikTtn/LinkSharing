@@ -36,8 +36,10 @@
         </div>
 
         <div class="col-md-6" >
-            <g:render template="searchResult" model="[searchResult:searchResult,searchKey:searchKey]"/>
+            <div id="filteredSearchDiv">
 
+            <g:render template="searchResult" model="[searchResult:searchResult,searchKey:searchKey,totalSearchResult:totalSearchResult]"/>
+            </div>
         </div>
 
 

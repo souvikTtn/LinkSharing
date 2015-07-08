@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row"  style="margin-top: 10px ;border:outset ;" >
-                <div class="col-md-12"> <div style="font-size: 18px;font-weight: bold">SearchResult "${searchKey}" records found[${searchResult?.size()}])</div></div>
+                <div class="col-md-12"> <div style="font-size: 18px;font-weight: bold">SearchResult "${params?.searchKey}" records found[${totalSearchResult}])</div></div>
 
             </div>
 
@@ -79,8 +79,9 @@
 
             <div class="row">
                 <div class="col-md-12" style="border: outset">
-                    %{--<g:paginate total="${total}" max="5" params="[q:params.q]"/>--}%
-
+                    <div class="paginateButtons">
+                        <util:remotePaginate total="${totalSearchResult}" update="filteredSearchDiv" action="filterSearch" params="[searchKey:params.searchKey]" pageSizes="[5: '5 on Page',10:'10 on Page',15:'15 on Page']"  />
+                    </div>
                 </div>
             </div>
 
@@ -89,6 +90,11 @@
 
     </div>
 </div>
+
+
+
+
+
 
 
 

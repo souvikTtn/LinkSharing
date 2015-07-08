@@ -87,6 +87,7 @@ grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
 grails.web.disable.multipart=false
 
+
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 
@@ -98,6 +99,9 @@ grails.hibernate.cache.queries = false
 grails.hibernate.pass.readonly = false
 // configure passing read-only to OSIV session by default, requires "singleSession = false" OSIV mode
 grails.hibernate.osiv.readonly = false
+grails.plugins.remotepagination.max=5
+//EnableBootstrap here when using twitter bootstrap, default is set to false.
+grails.plugins.remotepagination.enableBootstrap=true
 
 environments {
     development {

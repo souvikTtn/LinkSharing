@@ -85,7 +85,7 @@
                                     <ul class="nav navbar-nav navbar-right">
                                         <li> <g:form controller="search" action="globalSearch" class="navbar-form navbar-left" role="search">
                                             <div class="form-group">
-                                                <input type="text" name="searchKey" class="form-control" placeholder="Search" required/>
+                                                <input type="text" name="searchKey" class="form-control" placeholder="Search"/>
                                             </div>
                                             <button type="submit" class="btn btn-default">Search</button>
                                         </g:form>
