@@ -51,13 +51,13 @@
                     <table  class="table">
                     <caption> Profile</caption>
                     <tr>
-                    <td>First Name:*</td><td><g:textField name="firstName" value="${user.firstName}"/></td>
+                    <td>First Name:*</td><td><input type="text" name="firstName" value="${user.firstName}" required/></td>
                     </tr>
                     <tr>
-                    <td>Last Name:*</td><td><g:textField name="lastName" value="${user.lastName}"/></td>
+                    <td>Last Name:*</td><td><input type="text" name="lastName" value="${user.lastName}" required /></td>
                     </tr>
                     <tr>
-                    <td>User Name:*</td><td><g:textField name="username" value="${user.username}"/></td>
+                    <td>User Name:*</td><td><input type="text" name="username" value="${user.username}" required /></td>
                     </tr>
                     <tr>
                     <td>Image:</td><td><g:field type="file" name="photo"/></td>
@@ -93,10 +93,10 @@
                    <table class="table">
                    <caption>ChangePassword</caption>
                    <tr>
-                   <td>Password:</td><td><g:field type="password" name="password"/></td>
+                   <td>Password:</td><td><input type="password" name="password" required/></td>
                    </tr>
                    <tr>
-                   <td>Confirm Password:</td><td><g:field type="password" name="confirmPassword" /></td>
+                   <td>Confirm Password:</td><td><input type="password" name="confirmPassword" required/></td>
                    </tr>
                    <tr>
 
