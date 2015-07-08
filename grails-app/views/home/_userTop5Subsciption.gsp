@@ -8,7 +8,7 @@
             <div class="row"  style="margin-top: 10px ;border:outset ;" >
                 <div class="col-md-6"> <div style="font-size: 18px;font-weight: bold">Subcription</div></div>
                 <div class="col-md-6">
-                       <g:link controller="home" action="dashboard">view All</g:link>
+                       <g:link controller="subscription" action="userSubscription" params="[uid:user.id]">view All</g:link>
                 </div>
             </div>
 
@@ -118,7 +118,7 @@
                             <div class="col-md-3">
 
                             <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Seriousness
+                                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Visibility
                                     <span class="caret"></span></button>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(controller: "topic",action: "changeVisibility",params:[tid:topic.id,visibility:"PUBLIC"])}">PUBLIC</a></li>

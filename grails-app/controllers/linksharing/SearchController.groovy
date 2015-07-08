@@ -96,11 +96,6 @@ class SearchController {
             searchResult = []
         }
 
-
-
-
-
-
         render(template: 'searchResult', model: [searchResult: searchResult,totalSearchResult:searchResult.totalCount])
     }
 

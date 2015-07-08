@@ -1,3 +1,4 @@
+
 <%@ page import="linksharing.*"%>
 <% User user =session["user"]%>
 
@@ -6,18 +7,15 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row"  style="margin-top: 10px ;border:outset ;" >
-                <div class="col-md-6"> <div style="font-size: 18px;font-weight: bold">Topics</div></div>
-                <div class="col-md-6">
+                <div class="col-md-12"> <div style="font-size: 18px;font-weight: bold"> <h1>Subscription [ ${totalSubcribtion} ]</h1></div></div>
 
-                    <form><input type="text" placeholder="search"/> </form>
-                </div>
             </div>
 
             <div class="row">
 
                 <div class="col-md-12" >
 
-                    <% topics.each {Topic topic ->  %>
+                    <% userSubscribedTopic.each {Topic topic ->  %>
 
 
                     <div class="row" style="margin-top: 2px;margin-bottom: 2px; ; border: outset;" >
@@ -119,7 +117,7 @@
                                 <div class="col-md-3">
 
                                     <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Visibility
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Seriousness
                                             <span class="caret"></span></button>
                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                             <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(controller: "topic",action: "changeVisibility",params:[tid:topic.id,visibility:"PUBLIC"])}">PUBLIC</a></li>
@@ -151,10 +149,19 @@
 
                     <% } %>
                 </div>
+                <div class="row">
+                    <div class="col-md-12" style="border: outset;">
+                        <div class="paginateButtons">
+                            <util:remotePaginate total="${totalSubcribtion}" update="userSubscriptionDiv" action="filterUserSubscription"  pageSizes="[5: '5 on Page',10:'10 on Page',15:'15 on Page']"  />
+                        </div>
+                    </div>
+
+                </div>
 
 
 
             </div>
+
 
 
 
@@ -174,6 +181,11 @@
         });
     });
 </script>
+
+
+
+
+
 
 
 

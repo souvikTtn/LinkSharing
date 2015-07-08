@@ -63,7 +63,7 @@
 
 
                                     <ul class="nav navbar-nav">
-                                        <li class="active"><g:link controller="login" action="index">Home</g:link></li>
+                                        <li class="active"><a href="${createLink(uri: '/')}"  data-toggle="modal" title="Home" style="text-decoration: none"><span class="glyphicon glyphicon-home" style="font-size: 30px "/></a></li>
                                         <%
                                             if(session["user_id"]!=null)
                                             {
@@ -94,7 +94,7 @@
 
                                     <li>
 
-                                        <a href="" onclick="createTopic();return false" data-toggle="modal" title="create Topic" style="text-decoration: none">
+                                        <a href="" onclick="createTopic();return false"  data-toggle="modal" title="create Topic" style="text-decoration: none">
                                             <span class="glyphicon glyphicon-comment" style="font-size: 30px "/>
                                         </a>
                                     </li>
@@ -143,7 +143,7 @@
 
 
                                         <li class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="caret"></span></a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-user" style="font-size: 30px "/><span class="glyphicon glyphicon-arrow-down" style="font-size: 20px "/></a>
                                             <ul class="dropdown-menu">
                                                 <li> <g:link controller="profile" action="editProfile" name="userProfile">Profile</g:link></li>
                                                 <g:if test="${user.admin==true}">

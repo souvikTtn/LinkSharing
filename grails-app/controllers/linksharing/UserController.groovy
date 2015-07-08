@@ -28,7 +28,7 @@ class UserController {
         Integer userSubscriptionCount = userService.userSubscriptionsCount(user)
         Integer userTopicCount = userService.userTopicsCount(user)
 
-        List<Resource> resourceonPublicTopic = Resource.createCriteria().list() {
+        List<Resource> resourceonPublicTopic = Resource.createCriteria().list([max:5,offset:0]) {
 
             eq("creator", user)
             "topic" {
@@ -36,8 +36,26 @@ class UserController {
             }
         }
 
-        [user: user, userTopic: userTopic, resourceonPublicTopic: resourceonPublicTopic, userSubscriptionCount: userSubscriptionCount, userTopicCount: userTopicCount]
+        [user: user, userTopic: userTopic, resourceonPublicTopic: resourceonPublicTopic,totalResourceonPublicTopic:resourceonPublicTopic.totalCount, userSubscriptionCount: userSubscriptionCount, userTopicCount: userTopicCount]
     }
+
+    def filterResourcesOnPublicTopic(){
+        User user = User.findById(params.userId)
+
+        params.max = params.max ?: 5
+
+        List<Resource> resourceonPublicTopic = Resource.createCriteria().list(params) {
+
+            eq("creator", user)
+            "topic" {
+                eq('visibility', Visibility.PUBLIC)
+            }
+        }
+
+        render(template: 'userResources',model: [resourceonPublicTopic: resourceonPublicTopic,totalResourceonPublicTopic:resourceonPublicTopic.totalCount])
+
+    }
+
 
 
     def allUserList() {

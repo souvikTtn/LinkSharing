@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="collapse navbar-collapse" id="myNavbar">
                                     <ul class="nav navbar-nav">
-                                        <li class="active"><g:link controller="login" action="index">Home</g:link></li>
+                                        <li class="active"><a href="${createLink(uri: '/')}"  data-toggle="modal" title="Home" style="text-decoration: none"><span class="glyphicon glyphicon-home" style="font-size: 30px "/></a></li>
 
 
                                     </ul>

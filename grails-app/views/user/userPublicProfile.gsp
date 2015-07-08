@@ -37,8 +37,9 @@
       </div>
 
         <div class="col-md-6" >
-            <g:render template="/topic/topicResources" model="[resources:resourceonPublicTopic]"/>
-
+            <div id="resourceOnPublicDiv">
+            <g:render template="userResources" model="[resourceonPublicTopic:resourceonPublicTopic]"/>
+            </div>
         </div>
 
 

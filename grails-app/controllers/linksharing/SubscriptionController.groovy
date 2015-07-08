@@ -1,6 +1,7 @@
 package linksharing
 
 class SubscriptionController {
+    def userService
 
     def changeSeriousness(String tid) {
 
@@ -46,6 +47,46 @@ class SubscriptionController {
         } else {
             render("failure")
         }
+
+    }
+
+    def userSubscription(){
+        User user=session["user"]
+
+       List<Topic> userSubscribedTopic = Subscription.createCriteria().list([max:5,offset:0]) {
+           projections{
+               property('topic')
+           }
+           eq('user',user)
+          'topic'{ order('name','asc') }
+
+       }
+        println userSubscribedTopic*.id
+
+        [ userSubscribedTopic:userSubscribedTopic,totalSubcribtion:userSubscribedTopic.totalCount    ]
+
+
+
+    }
+
+    def filterUserSubscription(){
+        User user=session["user"]
+        params.max = params.max ?: 5
+
+        List<Topic> userSubscribedTopic = Subscription.createCriteria().list(params) {
+            projections{
+                property('topic')
+            }
+            eq('user',user)
+            'topic'{ order('name','asc') }
+
+        }
+        println userSubscribedTopic*.id
+
+
+      render (template: "subscription",model: [ userSubscribedTopic:userSubscribedTopic,totalSubcribtion:userSubscribedTopic.totalCount    ] )
+
+
 
     }
 
