@@ -27,7 +27,7 @@
         <g:renderErrors bean="${flash.linkResource}" />
         <% }%>
 
-
+        <h1> Share Link Post</h1>
         <g:form url="[controller:'LinkResource',action:'save']">
             <div class="form-group">
                 <label for="url">Link:</label>
