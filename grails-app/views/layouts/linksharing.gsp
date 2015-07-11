@@ -318,8 +318,7 @@
         });
 
 
-        $('.unsubscribe').on('click', function () {
-
+        $('.subsUnsubs').on('click', function () {
 
             var elem = $(this)
             var url = elem.attr('href')
@@ -354,6 +353,8 @@
 
 
     });
+
+
     var visibilityChange = function (value, topicid) {
         var dataJson = {
             visibility: value,

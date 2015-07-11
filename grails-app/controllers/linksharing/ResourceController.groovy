@@ -7,7 +7,7 @@ class ResourceController {
 
 
         Resource resource = Resource.findById(rid)
-        Integer ratedUserCount = ResourceRating.countByResource(resource)
+        Integer ratedUserCount =  ResourceRating.countByResource(resource)
         boolean showToEditAndDelete = false
         if (session["user"]) {
             User user = session["user"]
@@ -17,6 +17,7 @@ class ResourceController {
             }
 
         }
+
 
         if(session["user_id"]){
             request.setAttribute("trendingTopics",userService.trendingTopics())

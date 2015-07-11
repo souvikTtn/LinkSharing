@@ -89,7 +89,7 @@
                                                     <g:if test="${(Subscription.countByUserAndTopic(user, topic) == 1)}">
 
                                                         <g:if test="${(topic.user.id != user.id)}">
-                                                            <a class="unsubscribe" href="${
+                                                            <a class="subsUnsubs" href="${
                                                                 createLink(controller: "subscription", action: "subscrineAndUnsubscribe", params: [tid: topic.id])}"
                                                                onclick="return false">Unsubscribe</a>
 
@@ -98,7 +98,7 @@
                                                     <g:else>
 
 
-                                                        <a class="subscribe" href="${
+                                                        <a class="subsUnsubs" href="${
                                                             createLink(controller: "subscription", action: "subscrineAndUnsubscribe", params: [tid: topic.id])}"
                                                            onclick="return false">Subscribe</a>
 
@@ -170,6 +170,58 @@
                                 </div>
                             </div>
                         </g:if>
+                        <g:else>
+
+                            <div class="row">
+                                <div class="topicOption" hidden="hidden">
+
+                                    <div class="col-md-4">
+                                        <g:select
+                                                onchange="seriousnessChange(value,'${topic.id}')"
+                                                value="${sub?.seriousness}"
+                                                name="seriousness"
+                                                from="${linksharing.Seriousness}"/>
+
+                                    </div>
+
+                                    <div class="col-md-1"><a href="${  createLink(controller: 'home', action: 'invitation',params:                                       [topicId: topic.id])}"><span
+                                            class="glyphicon glyphicon-envelope" aria-hidden="true"
+                                            style="font-size: 25px"></span></a></div>
+
+                                    <g:if test="${(user.admin == true || topic.user.id == session["user_id"])}">
+
+
+
+                                        <div class="col-md-3">
+                                            <g:select
+                                                    onchange="visibilityChange(value,'${topic.id}')"
+                                                    value="${topic.visibility}"
+                                                    name="visibility"
+                                                    from="${linksharing.Visibility}"/>
+
+                                        </div>
+
+                                        <div class="col-md-2"><a href="" onclick="return false" class="editTopic"><span
+                                                class="glyphicon glyphicon-edit" aria-hidden="true"
+                                                style="font-size: 25px"></span></a></div>
+
+                                        <div class="col-md-2"><a href="${
+                                            createLink(controller: "topic", action: "deleteTopic", params: [tid: topic.id])}"
+                                                                 class="deleteTopic" onclick="return false"
+                                                                 role="button"><span class="glyphicon glyphicon-trash"
+                                                                                     aria-hidden="true"
+                                                                                     style="font-size: 25px"></span></a>
+                                        </div>
+                                    </g:if>
+
+                                </div>
+                            </div>
+
+
+
+
+
+                        </g:else>
 
 
 
@@ -234,7 +286,7 @@
                                                 %{--<h3> <g:link controller="topic" action="topicShow" params='[tid:"${topic.id}"]'>${topic.name}</g:link></h3></div>--}%
                                         %{--</div>--}%
                                         %{--<div class="topic_editDiv" hidden="hidden">--}%
-                                            %{--<g:form controller="topic" action="editTopic">--}%
+                                            %{--<g:form controll                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               "topic" action="editTopic">--}%
                                                 %{--<input type="text" name="topicName" value="${topic.name}"/> <g:hiddenField name="tid" value="${topic.id}"/> &nbsp;<input class="btn btn-info" type="submit" value="save"/><input class="cancelEditTopic" type="button" value="cancel"/>--}%
                                             %{--</g:form>--}%
 
