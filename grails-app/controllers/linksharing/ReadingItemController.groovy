@@ -2,19 +2,27 @@ package linksharing
 
 class ReadingItemController {
 
-    def markAsRead(String rid) {
+    def markAsReadAndUnread(String rid) {
 
+        println params
+        User user = session["user"]
+        Resource resource = Resource.findById(rid)
+        ReadingItem readingItem = ReadingItem.findByUserAndResource(user,resource)
 
-        def user_id = session["user_id"]
-
-        int status = ReadingItem.executeUpdate("delete ReadingItem rI  where rI.user.id=:uId and rI.resource.id=:rId",
-                [uId: user_id, rId: rid.toLong()])
-        if (status != 0) {
-            redirect(controller: "home", action: "dashboard")
-        } else {
-
-            render "failure"
+        if(readingItem.isRead==true)
+        {
+            readingItem.isRead=false
+            readingItem.save(flush: true,failOnError: true)
+            render "MarkAsRead"
         }
+        else
+        {
+            readingItem.isRead=true
+            readingItem.save(flush: true,failOnError: true)
+            render "MarkAsUnread"
+
+        }
+
 
 
     }

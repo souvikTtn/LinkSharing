@@ -10,7 +10,5 @@ enum Visibility
    }
    public String getValue() { return this.name }
    
-   String toString()
-   { return this.name
-   }
+
    }

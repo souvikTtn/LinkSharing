@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row"  style="margin-top: 10px ;border:outset ;" >
-                <div class="col-md-12"> <div style="font-size: 18px;font-weight: bold">SearchResult "${}" records found[${totalSearchResult}])</div></div>
+                <div class="col-md-12"> <div style="font-size: 18px;font-weight: bold">SearchResult "${params?.searchKey}" records found[${totalSearchResult}])</div></div>
 
             </div>
 

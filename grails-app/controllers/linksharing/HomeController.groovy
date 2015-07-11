@@ -84,7 +84,7 @@ class HomeController {
 
 
     def invitation(){
-        List<Topic> subscribedTopics
+        List<Topic> subscribedTopics=[]
 
         if(params['topicId']){
             Topic topic=Topic.findById(params["topicId"])

@@ -75,12 +75,13 @@ class TopicController {
     }
 
     def editTopic(String tid, String topicName) {
+        println params
 
         int status = Topic.executeUpdate("update Topic as topic set topic.name =:topicName where topic.id=:tid", [topicName: topicName, tid: tid.toLong()])
         if (status != 0) {
-            render "success"
+            render topicName
         } else {
-            render "failure"
+            render false
         }
 
 
@@ -93,9 +94,9 @@ class TopicController {
 
         int status = Topic.executeUpdate("update Topic as topic set topic.visibility=:visibility  where topic.id=:tid", [visibility: visibility, tid: tid.toLong()])
         if (status != 0) {
-            render "success visibility changed"
+            render "visibility successfully changeded"
         } else {
-            render "failure in changing visibility"
+            return  false
         }
 
 
