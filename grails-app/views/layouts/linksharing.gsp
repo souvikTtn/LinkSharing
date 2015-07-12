@@ -58,13 +58,13 @@
                                         <span class="icon-bar"></span>
 
                                     </button>
-                                    <a class="navbar-brand" href="${createLink(controller: "login",action: "index")}">LinkSharing</a>
+                                    <a class="navbar-brand" href="${createLink(controller: "home",action: "index")}">LinkSharing</a>
                                 </div>
 
                                 <div class="collapse navbar-collapse" id="myNavbar">
 
                                     <ul class="nav navbar-nav">
-                                        <li class="active"><a href="${createLink(controller: "login",action: "index")}" data-toggle="modal"
+                                        <li class="active"><a href="${createLink(controller: "home",action: "index")}" data-toggle="modal"
                                                               title="Home" style="text-decoration: none"><span
                                                     class="glyphicon glyphicon-home" style="font-size: 30px "/></a></li>
                                         <%
