@@ -7,43 +7,44 @@ class SearchController {
     def globalSearch(String searchKey) {
         User user = session["user"]
 
-        List<Resource> searchResult = searchService.globalSearch(user,searchKey,5,0)
+        //List<Resource> searchResult = searchService.globalSearch(user,searchKey,5,0)
+        List<Resource> searchResult
 
 
-//
-//        User user = session["user"]
-//        if (user.admin == true ) {
-//
-//            searchResult = Resource.createCriteria().list([max:5,offset:0]) {
-//                or {
-//                    ilike("description", "%${searchKey}%")
-//                    ilike("url", "%${searchKey}%")
-//                    'topic' {
-//                        ilike("name", "%${searchKey}%")
-//                    }
-//                }
-//
-//            }
-//        }
-//        else if( searchKey){
-//            searchResult = Resource.createCriteria().list([max:5,offset:0]) {
-//                or {
-//                    ilike("description", "%${searchKey}%")
-//                    ilike("url", "%${searchKey}%")
-//                    'topic' {
-//                        ilike("name", "%${searchKey}%")
-//                    }
-//                }
-//                'topic'{
-//                    eq('visibility',Visibility.PUBLIC)
-//                }
-//
-//            }
-//
-//        }else{
-//
-//            searchResult = []
-//        }
+
+
+        if (user?.admin == true ) {
+
+            searchResult = Resource.createCriteria().list([max:5,offset:0]) {
+                or {
+                    ilike("description", "%${searchKey}%")
+                    ilike("url", "%${searchKey}%")
+                    'topic' {
+                        ilike("name", "%${searchKey}%")
+                    }
+                }
+
+            }
+        }
+        else if( searchKey){
+            searchResult = Resource.createCriteria().list([max:5,offset:0]) {
+                or {
+                    ilike("description", "%${searchKey}%")
+                    ilike("url", "%${searchKey}%")
+                    'topic' {
+                        ilike("name", "%${searchKey}%")
+                    }
+                }
+                'topic'{
+                    eq('visibility',Visibility.PUBLIC)
+                }
+
+            }
+
+        }else{
+
+            searchResult = []
+        }
 
         // trending topics
         List<Topic> tredingTopics=userService.trendingTopics()
@@ -63,7 +64,7 @@ class SearchController {
         String searchKey=params.searchKey
 
         User user = session["user"]
-        if (user.admin == true ) {
+        if (user?.admin == true ) {
 
             searchResult = Resource.createCriteria().list([max:params.max,offset:params.offset]) {
                 or {

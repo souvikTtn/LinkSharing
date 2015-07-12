@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <meta name="layout" content="login"/>
+    <meta name="layout" content="linksharing"/>
     <title>Linsharinng Web Application</title>
 
 </head>

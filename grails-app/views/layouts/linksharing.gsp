@@ -25,9 +25,9 @@
 
 
 
-<r:require module="jquery"/></span>
-    <r:require module="jquery-ui"/>
-    <r:layoutResources/>
+%{--<r:require module="jquery"/></span>--}%
+    %{--<r:require module="jquery-ui"/>--}%
+    %{--<r:layoutResources/>--}%
 
 
 
@@ -58,13 +58,13 @@
                                         <span class="icon-bar"></span>
 
                                     </button>
-                                    <a class="navbar-brand" href="#">LinkSharing</a>
+                                    <a class="navbar-brand" href="${createLink(controller: "login",action: "index")}">LinkSharing</a>
                                 </div>
 
                                 <div class="collapse navbar-collapse" id="myNavbar">
 
                                     <ul class="nav navbar-nav">
-                                        <li class="active"><a href="${createLink(uri: '/')}" data-toggle="modal"
+                                        <li class="active"><a href="${createLink(controller: "login",action: "index")}" data-toggle="modal"
                                                               title="Home" style="text-decoration: none"><span
                                                     class="glyphicon glyphicon-home" style="font-size: 30px "/></a></li>
                                         <%
@@ -75,16 +75,12 @@
                                         <% } %>
 
                                     </ul>
-                                    <%
-                                        if (session["user_id"] != null) {
-                                            User user = session["user"]
-
-                                    %>
 
 
 
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <li><g:form controller="search" action="globalSearch"
+
+
+                                        <g:form controller="search" action="globalSearch"
                                                     class="navbar-form navbar-left" role="search">
                                             <div class="form-group">
                                                 <input type="text" name="searchKey" class="form-control"
@@ -92,7 +88,14 @@
                                             </div>
                                             <button type="submit" class="btn btn-default">Search</button>
                                         </g:form>
-                                        </li>
+
+                                    <%
+                                        if (session["user_id"] != null) {
+                                            User user = session["user"]
+
+                                    %>
+                                    <ul class="nav navbar-nav navbar-right">
+
 
 
                                         <li>

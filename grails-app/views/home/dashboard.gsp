@@ -22,6 +22,23 @@
       <div class="row">
 
           <div class="col-md-6">
+              <div class="row">
+                  <div class="col-md-12">
+                    <g:if test="${flash?.welcome}">
+                      <div class="alert alert-success">
+                          <a class="close" data-dismiss="alert">×</a>
+                          <strong>Welcome!</strong>${flash?.welcome}
+                      </div>
+                    </g:if>
+                      <g:if test="${flash?.postDelete}">
+                      <div class="alert alert-info">
+                          <a class="close" data-dismiss="alert">×</a>
+                          <strong>Info!</strong>${flash.postDelete}.
+                      </div>
+                      </g:if>
+
+                  </div>
+              </div>
                 <div class="row">
                     <div class="col-md-12">
                     <g:render template="userInfoPage" model="[user:user,totalUserSubscription:totalUserSubscription,totalUserCreatedTopic:totalUserCreatedTopic]" />
@@ -33,18 +50,7 @@
                       <g:render template="userTop5Subsciption" model="[subscriptionsTop5Topic:subscriptionsTop5Topic]" />
 
                   </div>
-                  %{--<div class="col-md-12">--}%
-                      %{--<g:render template="createLinkPost" model="[subscribedTopics:usertopics]" />--}%
 
-                  %{--</div>--}%
-                  %{--<div class="col-md-12">--}%
-                      %{--<g:render template="createDocumentPost" model="[subscribedTopics:usertopics]" />--}%
-
-                  %{--</div>--}%
-                  %{--<div class="col-md-12">--}%
-                      %{--<g:render template="createTopic" />--}%
-
-                  %{--</div>--}%
               </div>
 
 

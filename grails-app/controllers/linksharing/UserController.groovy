@@ -11,7 +11,7 @@ class UserController {
         User currentUser = session["user"]
         if (currentUser) {
 
-            if (currentUser.id == user.id || currentUser.admin == true) {
+            if (currentUser.id == user.id || currentUser?.admin == true) {
 
                 userTopic = Topic.findAllByUser(user, [sort: 'lastUpdated', order: 'desc'])
             } else {

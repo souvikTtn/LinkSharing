@@ -33,7 +33,7 @@ class LoginController {
             }
             session["user"] = user;
             session["user_id"] = user.id;
-            flash.message = "Welcome ${user}"
+            flash.welcome = " ${user}, you have successfully login."
             redirect(controller: "Home", action: "dashboard");
         } else {
             println("InCOrrect User :: going to redirect .... ")
@@ -81,7 +81,8 @@ class LoginController {
             session["user_id"] = user.id
             println("sesion name :::: " + session["user"])
             println("COrrect User :: going to redirect .... ")
-            redirect(url: '/')
+            flash.welcome = " ${user}, you have successfully Registered."
+            redirect(controller: "home",action: "dashboard");
         } else {
             println("InCOrrect User :: going to redirect .... ")
             user.errors.each {
@@ -94,7 +95,7 @@ class LoginController {
 
     def logout() {
         session.invalidate()
-        redirect(url: "/")
+        redirect(controller: "login",action: "index")
     }
 
 
