@@ -24,15 +24,6 @@
     <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
 
 
-
-%{--<r:require module="jquery"/></span>--}%
-    %{--<r:require module="jquery-ui"/>--}%
-    %{--<r:layoutResources/>--}%
-
-
-
-
-
     <asset:stylesheet src="application.css"/>
     <asset:javascript src="application.js"/>
     <g:layoutHead/>
@@ -58,7 +49,7 @@
                                         <span class="icon-bar"></span>
 
                                     </button>
-                                    <a class="navbar-brand" href="${createLink(controller: "home",action: "index")}">LinkSharing</a>
+                                    <a class="navbar-brand" href="${createLink(controller: "home",action: "index")}">Sharing Hub</a>
                                 </div>
 
                                 <div class="collapse navbar-collapse" id="myNavbar">
@@ -67,18 +58,17 @@
                                         <li class="active"><a href="${createLink(controller: "home",action: "index")}" data-toggle="modal"
                                                               title="Home" style="text-decoration: none"><span
                                                     class="glyphicon glyphicon-home" style="font-size: 30px "/></a></li>
-                                        <%
-                                            if (session["user_id"] != null) {
 
-                                        %>
-                                        <li><g:link controller="home" action="dashboard">DashBoard</g:link></li>
-                                        <% } %>
+
+
+                                        <g:if test="${session["user_id"]}">
+                                            <li><g:link controller="home" action="dashboard">DashBoard</g:link></li>
+
+                                        </g:if>
+
+
 
                                     </ul>
-
-
-
-
 
                                         <g:form controller="search" action="globalSearch"
                                                     class="navbar-form navbar-left" role="search">
@@ -89,11 +79,12 @@
                                             <button type="submit" class="btn btn-default">Search</button>
                                         </g:form>
 
-                                    <%
-                                        if (session["user_id"] != null) {
-                                            User user = session["user"]
 
-                                    %>
+                                <g:if test="${session["user_id"]}">
+                                    <% User user = session["user"] %>
+
+
+
                                     <ul class="nav navbar-nav navbar-right">
 
 
@@ -131,28 +122,6 @@
                                             </a>
                                         </li>
 
-                                        %{--<li>--}%
-                                        %{--<g:link action="create" controller="topic" data-toggle="modal" title="create Topic" style="text-decoration: none">--}%
-                                        %{--<span class="glyphicon glyphicon-comment" style="font-size: 30px "/>--}%
-                                        %{--</g:link>--}%
-
-                                        %{--</li>--}%
-
-                                        %{--<li>--}%
-                                        %{--<g:link action="invitation" controller="home"   data-toggle="modal" title="Send invitation" style="text-decoration: none">--}%
-                                        %{--<span class="glyphicon glyphicon-envelope" style="font-size: 30px"/>--}%
-                                        %{--</g:link>--}%
-                                        %{--</li>--}%
-                                        %{--<li>--}%
-                                        %{--<g:link action="create"  controller="linkResource" data-toggle="modal" title="Share Link" style="text-decoration: none">--}%
-                                        %{--<span class="glyphicon glyphicon-link" style="font-size: 30px "/>--}%
-                                        %{--</g:link>--}%
-                                        %{--</li>--}%
-                                        %{--<li>--}%
-                                        %{--<g:link  action="create" controller="documentResource" data-toggle="modal" title="Share Document" style="text-decoration: none">--}%
-                                        %{--<span class="glyphicon glyphicon-file" style="font-size: 30px "/>--}%
-                                        %{--</g:link>--}%
-                                        %{--</li>--}%
 
 
 
@@ -176,19 +145,10 @@
                                         </li>
                                     </ul>
 
-                                    <% } %>
+                                </g:if>
                                 </div>
                             </div>
                         </nav>
-
-
-
-
-
-
-
-
-
 
 
                         %{--dfasdf--}%
@@ -212,7 +172,7 @@
                 <div class="col-md-12">
                     <div id="footer">
 
-                        Copyright © intelligrape pvt ltd.
+                        All Rights Reserved. Developed and maintained by Intelligrape.
 
                     </div>
                 </div>
@@ -248,6 +208,7 @@
                 dataType: 'text',
 
                 success: function (data) {
+                    alert("you have changed the status of Post")
                     elem.text(data)
                 },
                 error: function (request, status, error) {

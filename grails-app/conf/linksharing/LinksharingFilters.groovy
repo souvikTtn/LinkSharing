@@ -3,7 +3,7 @@ package linksharing
 class LinksharingFilters {
 
     def filters = {
-        restrictLogin(controller: 'login|assets|console|topic|user|resource|search', action: '*', invert: true) {
+        restrictLogin(controller: 'login|assets|console|topic|user|resource|search|documentResource', action: '*', invert: true) {
             before = {
 
 
@@ -43,7 +43,18 @@ class LinksharingFilters {
             }
         }
 
-        user2(controller: "user",action:"*",actionExclude: "filterResourcesOnPublicTopic|userPublicProfile") {
+        user(controller: "user",action:"*",actionExclude: "filterResourcesOnPublicTopic|userPublicProfile") {
+            before = {
+                if (!session['user_id']) {
+                    redirect(controller: 'login', action: 'index')
+
+                    flash.message = "Please log-in to the system"
+                    return false
+                }
+
+            }
+        }
+        dowload(controller: "documentResource",action:"*",actionExclude: "downLoadDocoument") {
             before = {
                 if (!session['user_id']) {
                     redirect(controller: 'login', action: 'index')

@@ -60,26 +60,36 @@ class UserController {
 
     def allUserList() {
 
-        List<User> users = User.createCriteria().list(max: 3, offset: 0) {}
+        List<User> users = User.createCriteria().list(max: 2, offset: 0) {}
 
 
         [users: users, total: users.totalCount]
 
     }
 
+    def filterUserList(){
+        println params
+        params.max=params.max ?:2
+
+
+        List<User> users = User.createCriteria().list(params) {}
+        render template: "userAdminList",model: [users: users,total: users.totalCount]
+
+    }
+
     def showActiveUser() {
-        List<User> users = User.createCriteria().list(max: 3, offset: 0) {
+        List<User> users = User.createCriteria().list() {
             eq('active', true)
         }
-        render(view: 'allUserList', model: [users: users, total: users.totalCount])
+        render(view: 'allUserList', model: [users: users, total: users.size()])
     }
 
 
     def showDeactiveUser() {
-        List<User> users = User.createCriteria().list(max: 3, offset: 0) {
+        List<User> users = User.createCriteria().list() {
             eq('active', false)
         }
-        render(view: 'allUserList', model: [users: users, total: users.totalCount])
+        render(view: 'allUserList', model: [users: users, total: users.size()])
     }
 
 

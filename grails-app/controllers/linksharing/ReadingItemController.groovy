@@ -4,7 +4,7 @@ class ReadingItemController {
 
     def markAsReadAndUnread(String rid) {
 
-        println params
+
         User user = session["user"]
         Resource resource = Resource.findById(rid)
         ReadingItem readingItem = ReadingItem.findByUserAndResource(user,resource)

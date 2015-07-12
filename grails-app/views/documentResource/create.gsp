@@ -23,8 +23,8 @@
         <li>${flash.message}</li>
         <% }%>
 
-        <%if(flash?.linkResource){%>
-        <g:renderErrors bean="${flash.linkResource}" />
+        <%if( flash?.documentResource){%>
+        <g:renderErrors bean="${ flash.documentResource}" />
         <% }%>
         <h1>Share Document Post</h1>
 

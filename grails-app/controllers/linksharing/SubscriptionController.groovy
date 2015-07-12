@@ -6,7 +6,7 @@ class SubscriptionController {
     def userService
 
     def changeSeriousness(String tid) {
-        println params
+
 
         String user_id = session["user_id"];
         Seriousness seriousness = params.seriousness
@@ -22,35 +22,6 @@ class SubscriptionController {
 
     }
 
-//    def subscribeTopic(String tid) {
-//        User user = session["user"]
-//        Topic topic = Topic.findById(tid)
-//        Subscription subs = new Subscription(user: user, topic: topic, seriousness: Seriousness.SERIOUS);
-//        if (subs.validate()) {
-//            subs.save();
-//            render "success"
-//        } else {
-//
-//            render subs.errors
-//        }
-//
-//
-//    }
-//
-//
-//    def unSubcribeTopic(String tid) {
-//        String user_id = session["user_id"];
-//
-//        int status = Subscription.executeUpdate("delete Subscription subs where subs.user.id=:uid and subs.topic.id=:tid", [uid: user_id.toLong(), tid: tid.toLong()])
-//
-//        if (status != 0) {
-//
-//            render "success"
-//        } else {
-//            render("failure")
-//        }
-//
-//    }
 
 
     def subscrineAndUnsubscribe(String tid) {
@@ -95,7 +66,7 @@ class SubscriptionController {
             'topic' { order('name', 'asc') }
 
         }
-        println userSubscribedTopic*.id
+
 
         [userSubscribedTopic: userSubscribedTopic, totalSubcribtion: userSubscribedTopic.totalCount]
 
@@ -114,7 +85,7 @@ class SubscriptionController {
             'topic' { order('name', 'asc') }
 
         }
-        println userSubscribedTopic*.id
+
 
 
         render(template: "subscription", model: [userSubscribedTopic: userSubscribedTopic, totalSubcribtion: userSubscribedTopic.totalCount])

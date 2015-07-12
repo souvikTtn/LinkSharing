@@ -67,7 +67,7 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
         compile ":jquery-ui:1.10.4"
-        runtime ":resources:1.2.14"
+       // runtime ":resources:1.2.14"
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"

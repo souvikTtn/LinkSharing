@@ -75,7 +75,6 @@ class TopicController {
     }
 
     def editTopic(String tid, String topicName) {
-        println params
 
         int status = Topic.executeUpdate("update Topic as topic set topic.name =:topicName where topic.id=:tid", [topicName: topicName, tid: tid.toLong()])
         if (status != 0) {
@@ -89,7 +88,7 @@ class TopicController {
 
     def changeVisibility(String tid) {
 
-        println params
+
         Visibility visibility = params["visibility"];
 
         int status = Topic.executeUpdate("update Topic as topic set topic.visibility=:visibility  where topic.id=:tid", [visibility: visibility, tid: tid.toLong()])

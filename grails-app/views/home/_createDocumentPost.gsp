@@ -6,11 +6,11 @@
         <g:uploadForm url="[controller:'documentResource',action:'save']">
             <div class="form-group">
                 <label for="file">Link:</label>
-                <input type="file"  name="file" class="form-control" id="file">
+                <input type="file"  name="file" class="form-control" id="file required/">
             </div>
             <div class="form-group">
                 <label for="Description">Description:</label>
-                <textarea class="form-control" name="description" rows="4" id="description"></textarea>
+                <textarea class="form-control" name="description" rows="4" id="description "></textarea>
             </div>
             <div class="form-group">
                 <label for="topic">Topic:</label>

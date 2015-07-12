@@ -1,7 +1,6 @@
 package linksharing
 
 
-
 import org.springframework.web.multipart.MultipartFile
 
 class LoginController {
@@ -14,7 +13,7 @@ class LoginController {
 
         List<ResourceRating> topPosts = userService.topPosts();
 
-        [recentResources:recentResources, topPosts: topPosts]
+        [recentResources: recentResources, topPosts: topPosts]
 
     }
 
@@ -25,7 +24,7 @@ class LoginController {
         User user = User.findByEmail(email);
 
         if (user?.password == password) {
-            if( user.active==false){
+            if (user.active == false) {
 
                 flash.message = "User is Deactivated by Admin,can't login..."
                 redirect(controller: "login", action: "index");
@@ -36,12 +35,10 @@ class LoginController {
             flash.welcome = " ${user}, you have successfully login."
             redirect(controller: "Home", action: "dashboard");
         } else {
-            println("InCOrrect User :: going to redirect .... ")
+
             flash.message = "Please Enter the Correct Credentials"
             redirect(controller: "login", action: "index");
         }
-
-
 
 
     }
@@ -52,12 +49,11 @@ class LoginController {
 
         MultipartFile uploadedFile = params['photo']
         if (!uploadedFile.empty) {
-            println "Class: ${uploadedFile.class}"
-            println "Name: ${uploadedFile.name}"
-            println "OriginalFileName: ${uploadedFile.originalFilename}"
-            println "Size: ${uploadedFile.size}"
-            println "ContentType: ${uploadedFile.contentType}"
-
+//            println "Class: ${uploadedFile.class}"
+//            println "Name: ${uploadedFile.name}"
+//            println "OriginalFileName: ${uploadedFile.originalFilename}"
+//            println "Size: ${uploadedFile.size}"
+//            println "ContentType: ${uploadedFile.contentType}"
 
 
             def status = userService.uploadFile(uploadedFile, uploadedFile.originalFilename, "/home")
@@ -79,23 +75,19 @@ class LoginController {
             user.save(flush: true)
             session["user"] = user;
             session["user_id"] = user.id
-            println("sesion name :::: " + session["user"])
-            println("COrrect User :: going to redirect .... ")
+
             flash.welcome = " ${user}, you have successfully Registered."
-            redirect(controller: "home",action: "dashboard");
+            redirect(controller: "home", action: "dashboard");
         } else {
-            println("InCOrrect User :: going to redirect .... ")
-            user.errors.each {
-                println it
-            }
-            flash["user"]=user;
+
+            flash["user"] = user;
             redirect(controller: 'login', action: 'index')
         }
     }
 
     def logout() {
         session.invalidate()
-        redirect(controller: "login",action: "index")
+        redirect(controller: "login", action: "index")
     }
 
 

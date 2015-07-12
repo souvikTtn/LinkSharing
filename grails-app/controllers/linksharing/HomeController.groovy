@@ -53,7 +53,7 @@ class HomeController {
             }
         }
 
-        println trendingTopics*.id
+
         [user: user,totalUserSubscription:totalUserSubscription, totalUserCreatedTopic:totalUserCreatedTopic,usersubscriptions: usersubscriptions, usertopics: usertopics, subscriptionsTop5Topic: subscriptionsTop5Topic, inboxlist: inboxlist, total: inboxlist.totalCount, tredingTopics: trendingTopics]
     }
 
