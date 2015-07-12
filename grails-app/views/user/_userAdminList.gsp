@@ -15,8 +15,8 @@
         </tr>
         </thead>
         <tbody >
-        <g:each in="${users}" status="i" var="user">
-            <tr  class="${(i % 2) == 0 ? 'odd' : 'even'}">
+        <g:each in="${users}"  var="user">
+            <tr  >
                 <td >${fieldValue(bean:user, field: "id")}</td>
                 <td>${fieldValue(bean:user, field: "username")}</td>
                 <td>${fieldValue(bean:user, field: "email")}</td>
@@ -42,5 +42,5 @@
 
 
 <div class="paginateButtons">
-    <util:remotePaginate total="${total}" update="filteredUserListDiv" action="filterUserList" max="2" pageSizes="[5: '5 on Page',10:'10 on Page',15:'15 on Page']"  />
+    <util:remotePaginate total="${total}" update="filteredUserListDiv" action="filterUserList" max="5" pageSizes="[5: '5 on Page',10:'10 on Page',15:'15 on Page']"  />
 </div>

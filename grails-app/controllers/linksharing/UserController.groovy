@@ -60,7 +60,7 @@ class UserController {
 
     def allUserList() {
 
-        List<User> users = User.createCriteria().list(max: 2, offset: 0) {}
+        List<User> users = User.createCriteria().list(max: 5, offset: 0) {}
 
 
         [users: users, total: users.totalCount]
@@ -68,8 +68,9 @@ class UserController {
     }
 
     def filterUserList(){
-        println params
-        params.max=params.max ?:2
+        
+
+        params.max=params.max ?:5
 
 
         List<User> users = User.createCriteria().list(params) {}
