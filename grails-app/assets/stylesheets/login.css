@@ -3,21 +3,20 @@
     background-color:white;
     color:black;
     /*text-align:center;*/
-    padding:5px;
+
 }
 
 
 .webpageData{
     background-color: white;
-    float:left;
+
     padding: 5px;
-    margin: 5px;
+
 
 }
 #footer {
-    background-color:black;
-    color:white;
-    clear:both;
-    text-align:center;
-    padding:5px;
+    background-color: black;
+    color: white;
+
+    text-align: center;
 }

@@ -1,6 +1,6 @@
 
 
-<div class="row" style="margin:2px ; border: outset;">
+<div class="row" >
     <div class="col-md-3">
         <div >
         <g:link controller="user"  action="userPublicProfile" params="[userId:post.creator.id]">

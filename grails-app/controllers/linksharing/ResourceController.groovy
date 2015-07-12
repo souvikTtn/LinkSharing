@@ -35,6 +35,8 @@ class ResourceController {
     def deleteResource(String rid){
         Resource resource=Resource.findById(rid)
         resource.delete(flush:true)
+        flash.message="Post Deleted Successfully"
+        redirect( uri: "/");
 
 
     }

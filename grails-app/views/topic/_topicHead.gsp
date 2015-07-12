@@ -81,6 +81,7 @@
 
                                         <div class="col-md-4">
                                             <div class="changeSubscriptionDiv">
+                                                <g:if test="${session["user_id"]}">
 
                                                 <g:if test="${(Subscription.countByUserAndTopic(user, topic) == 1)}">
 
@@ -100,6 +101,7 @@
 
 
                                                 </g:else>
+                                                </g:if>
                                             </div>
 
                                         </div>
@@ -184,7 +186,7 @@
                                         class="glyphicon glyphicon-envelope" aria-hidden="true"
                                         style="font-size: 25px"></span></a></div>
 
-                                <g:if test="${(user.admin == true || topic.user.id == session["user_id"])}">
+                                <g:if test="${(user?.admin == true || topic.user.id == session["user_id"])}">
 
 
 

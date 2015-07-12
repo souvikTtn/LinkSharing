@@ -27,17 +27,14 @@
 
 </head>
 <body>
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        %{--<div class="col-md-1"></div>--}%
+
         <div class="col-md-12">
 
             <div class="row">
                 <div class="col-md-12">
                     <div id="header">
-                       %{--<h1>LinkSharing</h1>--}%
-
-
 
                         <nav class="navbar navbar-inverse">
                             <div class="container-fluid">
@@ -62,10 +59,6 @@
                         </nav>
 
 
-
-
-
-                        %{--dfasdf--}%
 
 
 

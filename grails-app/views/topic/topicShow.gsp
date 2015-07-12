@@ -167,32 +167,8 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                          <div class="row">
-                              <div class="col-md-12" style="border: outset;font-weight: bold;font-size: 20px;margin-top: 15px; ">
 
-                                  users:"${topic.name}"
-                              </div>
-
-                          </div>
-                            <div class="row">
-                                <div class="col-md-12" style="border: outset; ">
-
-                                    <g:render template="topicUser" model="[users:topicUsers]"/>
-                                </div>
-
-
-
-
-                            </div>
-
-
-
-
-
-
-
-
-
+                            <g:render template="topicUser" model="[users:topicUsers,topic: topic]"/>
                         </div>
                     </div>
 

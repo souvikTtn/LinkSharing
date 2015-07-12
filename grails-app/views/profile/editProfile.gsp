@@ -40,16 +40,20 @@
 
         </div>
         <div class="col-md-6" style="font-weight: bold;font-size: 16px;">
-            <div class ="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Profile</div>
+                <div class="panel-body">
+                    <div class ="row">
+
+                    <div class="col-md-12">
 
 
 
                     <g:uploadForm action="updateProfile" controller="profile" method="post">
 
                     <table  class="table">
-                    <caption> Profile</caption>
+
                     <tr>
                     <td>First Name:*</td><td><input type="text" name="firstName" value="${user.firstName}" required/></td>
                     </tr>
@@ -71,49 +75,48 @@
 
 
 
+                    </div>
+
+
+                    </div>
+
                 </div>
-                <div class="col-md-2"></div>
+
 
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div>
-                    <g:if test="${params["msg"]}">
-                    <li> ${params["msg"]}</li>
-                    </g:if>
+                        ${params.msg}
                     </div>
                 </div>
             </div>
-            <div class ="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
 
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">ChangePassword</div>
 
-                   <g:form url="[controller:'profile',action:'updatePassword']">
-                   <table class="table">
-                   <caption>ChangePassword</caption>
-                   <tr>
-                   <td>Password:</td><td><input type="password" name="password" required/></td>
-                   </tr>
-                   <tr>
-                   <td>Confirm Password:</td><td><input type="password" name="confirmPassword" required/></td>
-                   </tr>
-                   <tr>
+                <g:form url="[controller:'profile',action:'updatePassword']">
+                    <table class="table">
 
-                   <td><g:submitButton name="update"/></td>
+                        <tr>
+                            <td>Password:</td><td><input type="password" name="password" required/></td>
+                        </tr>
+                        <tr>
+                            <td>Confirm Password:</td><td><input type="password" name="confirmPassword" required/></td>
+                        </tr>
+                        <tr>
 
-                   </tr>
+                            <td><g:submitButton name="update"/></td>
 
-                   </table>
-                   </g:form>
+                        </tr>
 
-
-
-
-                </div>
-                <div class="col-md-2"></div>
-
+                    </table>
+                </g:form>
             </div>
+
+
+
 
         </div>
 
